@@ -31,7 +31,7 @@ public class Drzava implements Serializable {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "drzava")
 	private Set<NaseljenoMesto> drzava = new HashSet<NaseljenoMesto>();
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "valuta")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "drzava")
 	private Set<Valuta> valuta = new HashSet<Valuta>();
 	
 	public Drzava() {

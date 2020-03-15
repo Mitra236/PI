@@ -37,8 +37,8 @@ public class Valuta implements Serializable {
 	private boolean domicilna;
 	
 	@ManyToOne
-    @JoinColumn(name = "valuta", referencedColumnName = "valuta_id", nullable=false)
-	private Valuta valuta;
+    @JoinColumn(name = "drzava", referencedColumnName = "drzava_id", nullable=false)
+	private Drzava drzava;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "valuta")
 	private Set<KursUValuti> kursUValuti = new HashSet<KursUValuti>();
@@ -53,14 +53,14 @@ public class Valuta implements Serializable {
 		super();
 	}
 
-	public Valuta(int id, String zvanicnaSifra, String naziv, boolean domicilna, Valuta valuta,
+	public Valuta(int id, String zvanicnaSifra, String naziv, boolean domicilna, Drzava drzava,
 			Set<KursUValuti> kursUValuti, Set<Transakcija> transakcija, Set<RacunPravnogLica> racunPravnogLica) {
 		super();
 		this.id = id;
 		this.zvanicnaSifra = zvanicnaSifra;
 		this.naziv = naziv;
 		this.domicilna = domicilna;
-		this.valuta = valuta;
+		this.drzava = drzava;
 		this.kursUValuti = kursUValuti;
 		this.transakcija = transakcija;
 		this.racunPravnogLica = racunPravnogLica;
@@ -98,12 +98,12 @@ public class Valuta implements Serializable {
 		this.domicilna = domicilna;
 	}
 
-	public Valuta getValuta() {
-		return valuta;
+	public Drzava getDrzava() {
+		return drzava;
 	}
 
-	public void setValuta(Valuta valuta) {
-		this.valuta = valuta;
+	public void setDrzava(Drzava drzava) {
+		this.drzava = drzava;
 	}
 
 	public Set<KursUValuti> getKursUValuti() {
