@@ -45,7 +45,7 @@ public class Klijent implements Serializable {
 	@Column(name = "adresa", unique = true, nullable = true)
 	private String adresa;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "klijent")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "klijent")
 	private Set<RacunPravnogLica> racunPravnogLica = new HashSet<RacunPravnogLica>();
 	
 	public Klijent() {

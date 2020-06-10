@@ -3,10 +3,12 @@ package com.pi.PoslovnaBanka.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.entity.Valuta;
 import com.pi.PoslovnaBanka.repository.ValutaRepository;
 
+@Service
 public class ValutaService implements ValutaServiceInterface {
 	
 	@Autowired

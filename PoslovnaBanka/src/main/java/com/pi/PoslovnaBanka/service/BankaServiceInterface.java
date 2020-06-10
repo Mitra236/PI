@@ -10,4 +10,5 @@ public interface BankaServiceInterface {
 	List<Banka> findAll();
 	int save(Banka banka);
 	boolean remove(int id);
+	Banka getBankByName(String naziv);
 }

@@ -3,10 +3,12 @@ package com.pi.PoslovnaBanka.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.entity.MedjubankarskiTransfer;
 import com.pi.PoslovnaBanka.repository.MedjubankarskiTransferRepository;
 
+@Service
 public class MedjubankarskiTransferService implements MedjubankarskiTransferServiceInterface {
 	
 	@Autowired

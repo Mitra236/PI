@@ -3,10 +3,12 @@ package com.pi.PoslovnaBanka.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.repository.BankaRepository;
 
+@Service
 public class BankaService implements BankaServiceInterface{
 	
 	@Autowired
@@ -31,6 +33,11 @@ public class BankaService implements BankaServiceInterface{
 	public boolean remove(int id) {
 		bankaRepository.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public Banka getBankByName(String naziv) {
+		return bankaRepository.getBankByName(naziv);
 	}
 	
 	

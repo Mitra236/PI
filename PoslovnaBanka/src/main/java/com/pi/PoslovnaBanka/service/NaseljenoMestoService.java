@@ -3,10 +3,12 @@ package com.pi.PoslovnaBanka.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.entity.NaseljenoMesto;
 import com.pi.PoslovnaBanka.repository.NaseljenoMestoRepository;
 
+@Service
 public class NaseljenoMestoService implements NaseljenoMestoServiceInterface {
 	
 	@Autowired

@@ -92,6 +92,11 @@ public class Banka implements Serializable {
 		this.bankaNalogodavac = bankaNalogodavac;
 		this.bankaPoverilac = bankaPoverilac;
 	}
+	
+	public Banka(int id, String naziv) {
+		this.id = id;
+		this.naziv = naziv;
+	}
 
 	public int getId() {
 		return id;

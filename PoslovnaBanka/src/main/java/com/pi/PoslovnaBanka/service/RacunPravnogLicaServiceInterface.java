@@ -9,4 +9,5 @@ public interface RacunPravnogLicaServiceInterface {
 	List<RacunPravnogLica> findAll();
 	int save(RacunPravnogLica racunPravnogLica);
 	boolean remove(int id);
+	RacunPravnogLica getAccountByUser(int client);
 }
