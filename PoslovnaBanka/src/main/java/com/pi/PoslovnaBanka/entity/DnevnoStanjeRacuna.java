@@ -43,7 +43,7 @@ public class DnevnoStanjeRacuna implements Serializable {
 	private RacunPravnogLica racunPravnogLica;
 	
 	@ManyToOne
-    @JoinColumn(name = "transakcija", referencedColumnName = "transakcija_id", nullable=false)
+    @JoinColumn(name = "transakcija", referencedColumnName = "transakcija_id", nullable=true)
 	private Transakcija transakcija;
 	
 	public DnevnoStanjeRacuna() {

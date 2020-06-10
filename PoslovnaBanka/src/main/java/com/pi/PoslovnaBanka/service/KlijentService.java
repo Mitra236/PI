@@ -23,8 +23,7 @@ public class KlijentService implements KlijentServiceInterface {
 	@Override
 	public Page<Klijent> findAll(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<Klijent> klijentPage = klijentRepo.findAll(pageable);
-		return klijentPage;
+		return klijentRepo.findAll(pageable);
 	}
 
 	@Override

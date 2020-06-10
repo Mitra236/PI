@@ -34,7 +34,7 @@ public class RacunPravnogLica implements Serializable {
 	@Column(name = "datum_otvaranja", unique = false, nullable = false)
 	private Date datumOtvaranja;
 	
-	@Column(name = "ptt", unique = true, nullable = false)
+	@Column(name = "vazeci", unique = false, nullable = false)
 	private boolean vazeci;
 	
 	@ManyToOne

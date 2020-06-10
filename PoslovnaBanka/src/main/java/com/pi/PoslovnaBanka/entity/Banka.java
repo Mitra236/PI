@@ -1,6 +1,7 @@
 package com.pi.PoslovnaBanka.entity;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "banke" )
@@ -37,6 +39,7 @@ public class Banka implements Serializable {
 	@Column(name = "adresa", unique = false, nullable = false)
 	private String adresa;
 	
+	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
@@ -49,7 +52,7 @@ public class Banka implements Serializable {
 	@Column(name = "telefon", unique = true, nullable = false)
 	private String telefon;
 	
-	@Column(name = "swift", unique = false, nullable = false, length = 3)
+	@Column(name = "swift", unique = false, nullable = false)
 	private String SWIFT;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "banka")
