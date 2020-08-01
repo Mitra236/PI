@@ -46,7 +46,7 @@ public class RacunPravnogLica implements Serializable {
 	private Banka banka;
 	
 	@ManyToOne
-    @JoinColumn(name = "ukidanje", referencedColumnName = "ukidanje_id", nullable=false)
+    @JoinColumn(name = "ukidanje", referencedColumnName = "ukidanje_id", nullable=true)
 	private Ukidanje ukidanje;
 	
 	@ManyToOne

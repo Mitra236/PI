@@ -39,13 +39,16 @@ public class Klijent implements Serializable {
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@Column(name = "telefon", unique = true, nullable = true)
+	@Column(name = "telefon", unique = false, nullable = true)
 	private String telefon;
 	
-	@Column(name = "adresa", unique = true, nullable = true)
+	@Column(name = "adresa", unique = false, nullable = true)
 	private String adresa;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "klijent")
+	@Column(name = "uloga", unique = false, nullable = true)
+	private Uloga uloga;
+	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "klijent")
 	private Set<RacunPravnogLica> racunPravnogLica = new HashSet<RacunPravnogLica>();
 	
 	public Klijent() {

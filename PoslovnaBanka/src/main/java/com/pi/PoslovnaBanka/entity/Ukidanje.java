@@ -29,7 +29,7 @@ public class Ukidanje implements Serializable {
 	@Column(name = "datum_ukidanja", unique = false, nullable = false)
 	private Date datumUkidanja;
 	
-	@Column(name = "sredstva_se_prenose_na_racun", unique = true, nullable = false)
+	@Column(name = "sredstva_se_prenose_na_racun", unique = true, nullable = true)
 	private String sredstvaSePrenoseNaRacun;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "ukidanje")

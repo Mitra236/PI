@@ -73,6 +73,9 @@ public class Transakcija implements Serializable {
 	@Column(name = "status", unique = false, nullable = false)
 	private Status status;
 	
+	@Column(name = "smer", unique = false, nullable = false)
+	private SmerTransakcije smer;
+	
 	@ManyToOne
     @JoinColumn(name = "naseljeno_mesto", referencedColumnName = "naseljeno_mesto_id", nullable=false)
 	private NaseljenoMesto naseljenoMesto;
@@ -89,9 +92,6 @@ public class Transakcija implements Serializable {
     @JoinColumn(name = "vrsta_placanja", referencedColumnName = "vrsta_placanja_id", nullable=true)
 	private VrstaPlacanja vrstaPlacanja;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "transakcija")
-	private Set<MedjubankarskiTransfer> medjubankarskiTransfer = new HashSet<MedjubankarskiTransfer>();
-	
 	public Transakcija() {
 		super();
 	}
@@ -100,8 +100,7 @@ public class Transakcija implements Serializable {
 			Date datumValute, String racunDuznika, int modelZaduzenja, String pozivNaBrojZaduzenja,
 			String racunPoverioca, int modelOdobrenja, String pozivNaBrojOdobrenja, boolean hitno, double iznos,
 			TipGreske tipGreske, Status status, NaseljenoMesto naseljenoMesto, Valuta valuta,
-			DnevnoStanjeRacuna dnevnoStanjeRacuna, VrstaPlacanja vrstaPlacanja,
-			Set<MedjubankarskiTransfer> medjubankarskiTransfer) {
+			DnevnoStanjeRacuna dnevnoStanjeRacuna, VrstaPlacanja vrstaPlacanja) {
 		super();
 		this.brojStavke = brojStavke;
 		this.duznik = duznik;
@@ -123,7 +122,6 @@ public class Transakcija implements Serializable {
 		this.valuta = valuta;
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
 		this.vrstaPlacanja = vrstaPlacanja;
-		this.medjubankarskiTransfer = medjubankarskiTransfer;
 	}
 
 	public int getBrojStavke() {
@@ -286,11 +284,11 @@ public class Transakcija implements Serializable {
 		this.vrstaPlacanja = vrstaPlacanja;
 	}
 
-	public Set<MedjubankarskiTransfer> getMedjubankarskiTransfer() {
-		return medjubankarskiTransfer;
+	public SmerTransakcije getSmer() {
+		return smer;
 	}
 
-	public void setMedjubankarskiTransfer(Set<MedjubankarskiTransfer> medjubankarskiTransfer) {
-		this.medjubankarskiTransfer = medjubankarskiTransfer;
+	public void setSmer(SmerTransakcije smer) {
+		this.smer = smer;
 	}
 }

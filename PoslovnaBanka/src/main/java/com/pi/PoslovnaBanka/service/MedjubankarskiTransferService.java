@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pi.PoslovnaBanka.entity.MedjubankarskiTransfer;
+import com.pi.PoslovnaBanka.entity.Poruka;
 import com.pi.PoslovnaBanka.repository.MedjubankarskiTransferRepository;
 
 @Service
@@ -15,17 +15,17 @@ public class MedjubankarskiTransferService implements MedjubankarskiTransferServ
 	MedjubankarskiTransferRepository medjubankarskiTransferRepo;
 
 	@Override
-	public MedjubankarskiTransfer findOne(int id) {
+	public Poruka findOne(int id) {
 		return medjubankarskiTransferRepo.findById(id).orElse(null);
 	}
 
 	@Override
-	public List<MedjubankarskiTransfer> findAll() {
+	public List<Poruka> findAll() {
 		return medjubankarskiTransferRepo.findAll();
 	}
 
 	@Override
-	public int save(MedjubankarskiTransfer medjubankarskiTransfer) {
+	public int save(Poruka medjubankarskiTransfer) {
 		return medjubankarskiTransferRepo.save(medjubankarskiTransfer).getId();
 	}
 

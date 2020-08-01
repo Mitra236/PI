@@ -62,10 +62,10 @@ public class Banka implements Serializable {
 	private Set<RacunPravnogLica> racunPravnogLica = new HashSet<RacunPravnogLica>();
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "racunNalogodavca")
-	private Set<MedjubankarskiTransfer> bankaNalogodavac = new HashSet<MedjubankarskiTransfer>();
+	private Set<Poruka> bankaNalogodavac = new HashSet<Poruka>();
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "racunPoverioca")
-	private Set<MedjubankarskiTransfer> bankaPoverilac = new HashSet<MedjubankarskiTransfer>();
+	private Set<Poruka> bankaPoverilac = new HashSet<Poruka>();
 	
 	public Banka() {
 		super();
@@ -74,8 +74,8 @@ public class Banka implements Serializable {
 
 	public Banka(int id, String sifraBanke, String naziv, String pIB, String adresa, String email, String web,
 			String fax, String telefon, String sWIFT, Set<KursnaLista> kursnaLista,
-			Set<RacunPravnogLica> racunPravnogLica, Set<MedjubankarskiTransfer> bankaNalogodavac,
-			Set<MedjubankarskiTransfer> bankaPoverilac) {
+			Set<RacunPravnogLica> racunPravnogLica, Set<Poruka> bankaNalogodavac,
+			Set<Poruka> bankaPoverilac) {
 		super();
 		this.id = id;
 		this.sifraBanke = sifraBanke;
@@ -194,19 +194,19 @@ public class Banka implements Serializable {
 		this.racunPravnogLica = racunPravnogLica;
 	}
 
-	public Set<MedjubankarskiTransfer> getBankaNalogodavac() {
+	public Set<Poruka> getBankaNalogodavac() {
 		return bankaNalogodavac;
 	}
 
-	public void setBankaNalogodavac(Set<MedjubankarskiTransfer> bankaNalogodavac) {
+	public void setBankaNalogodavac(Set<Poruka> bankaNalogodavac) {
 		this.bankaNalogodavac = bankaNalogodavac;
 	}
 
-	public Set<MedjubankarskiTransfer> getBankaPoverilac() {
+	public Set<Poruka> getBankaPoverilac() {
 		return bankaPoverilac;
 	}
 
-	public void setBankaPoverilac(Set<MedjubankarskiTransfer> bankaPoverilac) {
+	public void setBankaPoverilac(Set<Poruka> bankaPoverilac) {
 		this.bankaPoverilac = bankaPoverilac;
 	}
 }

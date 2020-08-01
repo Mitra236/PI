@@ -1,5 +1,7 @@
 package com.pi.PoslovnaBanka.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +37,12 @@ public class KlijentService implements KlijentServiceInterface {
 	public boolean remove(int id) {
 		klijentRepo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public List<Klijent> findAll() {
+		// TODO Auto-generated method stub
+		return klijentRepo.findAll();
 	}
 
 }

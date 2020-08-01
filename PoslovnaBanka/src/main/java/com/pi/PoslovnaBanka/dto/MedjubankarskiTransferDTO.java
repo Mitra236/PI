@@ -2,7 +2,7 @@ package com.pi.PoslovnaBanka.dto;
 
 import java.io.Serializable;
 
-import com.pi.PoslovnaBanka.entity.MedjubankarskiTransfer;
+import com.pi.PoslovnaBanka.entity.Poruka;
 
 
 public class MedjubankarskiTransferDTO implements Serializable {
@@ -31,11 +31,11 @@ public class MedjubankarskiTransferDTO implements Serializable {
 		super();
 	}
 	
-	public MedjubankarskiTransferDTO(MedjubankarskiTransfer medjubankarskiTransfer) {
-		this(medjubankarskiTransfer.getId(), medjubankarskiTransfer.getUkupanIznos(), medjubankarskiTransfer.getTip(), 
-				new TransakcijaDTO(medjubankarskiTransfer.getTransakcija()), new BankaDTO(medjubankarskiTransfer.getRacunPoverioca()),
-					new BankaDTO(medjubankarskiTransfer.getRacunNalogodavca()));
-	}
+//	public MedjubankarskiTransferDTO(Poruka medjubankarskiTransfer) {
+//		this(medjubankarskiTransfer.getId(), medjubankarskiTransfer.getUkupanIznos(), medjubankarskiTransfer.getTip(), 
+//				new TransakcijaDTO(medjubankarskiTransfer.getTransakcija()), new BankaDTO(medjubankarskiTransfer.getRacunPoverioca()),
+//					new BankaDTO(medjubankarskiTransfer.getRacunNalogodavca()));
+//	}
 
 	public int getId() {
 		return id;
