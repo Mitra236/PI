@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.pi.PoslovnaBanka.entity.Klijent;
+import com.pi.PoslovnaBanka.entity.Uloga;
 
 public class KlijentDTO implements Serializable {
 
@@ -16,9 +17,10 @@ public class KlijentDTO implements Serializable {
 	private String email;
 	private String telefon;
 	private String adresa;
+	private Uloga uloga;
 	private ArrayList<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
 	
-	public KlijentDTO(int id, String ime, String prezime, String jMBG, String email, String telefon, String adresa,
+	public KlijentDTO(int id, String ime, String prezime, String jMBG, String email, String telefon, String adresa, Uloga uloga,
 			ArrayList<RacunPravnogLicaDTO> racunPravnogLica) {
 		super();
 		this.id = id;
@@ -28,16 +30,13 @@ public class KlijentDTO implements Serializable {
 		this.email = email;
 		this.telefon = telefon;
 		this.adresa = adresa;
+		this.uloga = uloga;
 		this.racunPravnogLica = racunPravnogLica;
-	}
-
-	public KlijentDTO() {
-		super();
 	}
 	
 	public KlijentDTO(Klijent klijent) {
 		this(klijent.getId(), klijent.getIme(), klijent.getPrezime(), klijent.getJMBG(), klijent.getEmail(), klijent.getTelefon(),
-				klijent.getAdresa(), new ArrayList<RacunPravnogLicaDTO>());
+				klijent.getAdresa(), klijent.getUloga(), new ArrayList<RacunPravnogLicaDTO>());
 	}
 
 	public int getId() {
@@ -108,4 +107,11 @@ public class KlijentDTO implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Uloga getUloga() {
+		return uloga;
+	}
+
+	public void setUloga(Uloga uloga) {
+		this.uloga = uloga;
+	}
 }

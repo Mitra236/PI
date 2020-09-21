@@ -55,8 +55,8 @@ public class Klijent implements Serializable {
 		super();
 	}
 
-	public Klijent(int id, String ime, String prezime, String jMBG, String email, String telefon, String adresa,
-			Set<RacunPravnogLica> racunPravnogLica) {
+	public Klijent(int id, String ime, String prezime, String jMBG, @Email String email, String telefon, String adresa,
+			Uloga uloga, Set<RacunPravnogLica> racunPravnogLica) {
 		super();
 		this.id = id;
 		this.ime = ime;
@@ -65,6 +65,7 @@ public class Klijent implements Serializable {
 		this.email = email;
 		this.telefon = telefon;
 		this.adresa = adresa;
+		this.uloga = uloga;
 		this.racunPravnogLica = racunPravnogLica;
 	}
 
@@ -130,5 +131,13 @@ public class Klijent implements Serializable {
 
 	public void setRacunPravnogLica(Set<RacunPravnogLica> racunPravnogLica) {
 		this.racunPravnogLica = racunPravnogLica;
+	}
+
+	public Uloga getUloga() {
+		return uloga;
+	}
+
+	public void setUloga(Uloga uloga) {
+		this.uloga = uloga;
 	}
 }

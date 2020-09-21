@@ -2,8 +2,8 @@ package com.pi.PoslovnaBanka.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 
+import com.pi.PoslovnaBanka.entity.SmerTransakcije;
 import com.pi.PoslovnaBanka.entity.Status;
 import com.pi.PoslovnaBanka.entity.TipGreske;
 import com.pi.PoslovnaBanka.entity.Transakcija;
@@ -29,18 +29,17 @@ public class TransakcijaDTO implements Serializable {
 	private double iznos;
 	private TipGreske tipGreske;
 	private Status status;
+	private SmerTransakcije smerTransakcije;
 	private NaseljenoMestoDTO naseljenoMesto;
 	private ValutaDTO valuta;
 	private DnevnoStanjeDTO dnevnoStanjeRacuna;
 	private VrstaPlacanjaDTO vrstaPlacanja;
-	private ArrayList<MedjubankarskiTransferDTO> medjubankarskiTransfer = new ArrayList<MedjubankarskiTransferDTO>();
 	
 	public TransakcijaDTO(int brojStavke, String duznik, String svrhaPlacanja, String poverilac, Date datumPrijema,
 			Date datumValute, String racunDuznika, int modelZaduzenja, String pozivNaBrojZaduzenja,
 			String racunPoverioca, int modelOdobrenja, String pozivNaBrojOdobrenja, boolean hitno, double iznos,
-			TipGreske tipGreske, Status status, NaseljenoMestoDTO naseljenoMesto, ValutaDTO valuta,
-			DnevnoStanjeDTO dnevnoStanjeRacuna, VrstaPlacanjaDTO vrstaPlacanja,
-			ArrayList<MedjubankarskiTransferDTO> medjubankarskiTransfer) {
+			TipGreske tipGreske, Status status, SmerTransakcije smerTransakcije, NaseljenoMestoDTO naseljenoMesto, ValutaDTO valuta,
+			DnevnoStanjeDTO dnevnoStanjeRacuna, VrstaPlacanjaDTO vrstaPlacanja) {
 		super();
 		this.brojStavke = brojStavke;
 		this.duznik = duznik;
@@ -58,11 +57,11 @@ public class TransakcijaDTO implements Serializable {
 		this.iznos = iznos;
 		this.tipGreske = tipGreske;
 		this.status = status;
+		this.smerTransakcije = smerTransakcije;
 		this.naseljenoMesto = naseljenoMesto;
 		this.valuta = valuta;
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
 		this.vrstaPlacanja = vrstaPlacanja;
-		this.medjubankarskiTransfer = medjubankarskiTransfer;
 	}
 
 	public TransakcijaDTO() {
@@ -73,10 +72,10 @@ public class TransakcijaDTO implements Serializable {
 		this(transakcija.getBrojStavke(), transakcija.getDuznik(), transakcija.getSvrhaPlacanja(), transakcija.getPoverilac(),
 				transakcija.getDatumPrijema(), transakcija.getDatumValute(), transakcija.getRacunDuznika(), transakcija.getModelZaduzenja(),
 				transakcija.getPozivNaBrojZaduzenja(), transakcija.getRacunPoverioca(), transakcija.getModelOdobrenja(),
-				transakcija.getPozivNaBrojOdobrenja(), transakcija.isHitno(), transakcija.getIznos(), transakcija.getTipGreske(), transakcija.getStatus(),
+				transakcija.getPozivNaBrojOdobrenja(), transakcija.isHitno(), transakcija.getIznos(), transakcija.getTipGreske(),
+				transakcija.getStatus(), transakcija.getSmer(),
 				new NaseljenoMestoDTO(transakcija.getNaseljenoMesto()), new ValutaDTO(transakcija.getValuta()), 
-				new DnevnoStanjeDTO(transakcija.getDnevnoStanjeRacuna()), new VrstaPlacanjaDTO(transakcija.getVrstaPlacanja()),
-				new ArrayList<MedjubankarskiTransferDTO>());
+				new DnevnoStanjeDTO(transakcija.getDnevnoStanjeRacuna()), new VrstaPlacanjaDTO(transakcija.getVrstaPlacanja()));
 	}
 	public int getBrojStavke() {
 		return brojStavke;
@@ -238,15 +237,15 @@ public class TransakcijaDTO implements Serializable {
 		this.vrstaPlacanja = vrstaPlacanja;
 	}
 
-	public ArrayList<MedjubankarskiTransferDTO> getMedjubankarskiTransfer() {
-		return medjubankarskiTransfer;
-	}
-
-	public void setMedjubankarskiTransfer(ArrayList<MedjubankarskiTransferDTO> medjubankarskiTransfer) {
-		this.medjubankarskiTransfer = medjubankarskiTransfer;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public SmerTransakcije getSmerTransakcije() {
+		return smerTransakcije;
+	}
+
+	public void setSmerTransakcije(SmerTransakcije smerTransakcije) {
+		this.smerTransakcije = smerTransakcije;
 	}
 }

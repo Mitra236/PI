@@ -30,7 +30,7 @@ INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, pro
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-13", 57000, 89000, 18000, 100000, 2)
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-11", 33000, 35000, 11000, 50000, 2)
 
-INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("maki", "svrha", "betmen", "2019-07-23", "2019-08-08", "1234 5954 3882 9394", 97, "392439248", "43284329048230", 97, "432948329843", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
+--INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("maki", "svrha", "betmen", "2019-07-23", "2019-08-08", "1234 5954 3882 9394", 97, "392439248", "43284329048230", 97, "432948329843", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
 
 INSERT INTO kursne_liste(datum, broj_kursne_liste, datum_primene, banka) VALUES ("2020-03-13", 234, "2020-03-15", 1)
 INSERT INTO kursne_liste(datum, broj_kursne_liste, datum_primene, banka) VALUES ("2020-03-10", 999, "2020-03-13", 2)

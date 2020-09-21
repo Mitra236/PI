@@ -21,13 +21,13 @@ public class BankaDTO implements Serializable {
 	private String SWIFT;
 	private ArrayList<KursnaListaDTO> kursnaLista = new ArrayList<KursnaListaDTO>();
 	private ArrayList<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
-	private ArrayList<MedjubankarskiTransferDTO> bankaNalogodavac = new ArrayList<MedjubankarskiTransferDTO>();
-	private ArrayList<MedjubankarskiTransferDTO> bankaPoverilac = new ArrayList<MedjubankarskiTransferDTO>();
+	private ArrayList<PorukaDTO> bankaNalogodavac = new ArrayList<PorukaDTO>();
+	private ArrayList<PorukaDTO> bankaPoverilac = new ArrayList<PorukaDTO>();
 	
 	public BankaDTO(int id, String sifraBanke, String naziv, String pIB, String adresa, String email, String web,
 			String fax, String telefon, String sWIFT, ArrayList<KursnaListaDTO> kursnaLista,
-			ArrayList<RacunPravnogLicaDTO> racunPravnogLica, ArrayList<MedjubankarskiTransferDTO> bankaNalogodavac,
-			ArrayList<MedjubankarskiTransferDTO> bankaPoverilac) {
+			ArrayList<RacunPravnogLicaDTO> racunPravnogLica, ArrayList<PorukaDTO> bankaNalogodavac,
+			ArrayList<PorukaDTO> bankaPoverilac) {
 		super();
 		this.id = id;
 		this.sifraBanke = sifraBanke;
@@ -53,7 +53,7 @@ public class BankaDTO implements Serializable {
 		this(banka.getId(), banka.getSifraBanke(), banka.getNaziv(), banka.getPIB(), 
 				banka.getAdresa(), banka.getEmail(), banka.getWeb(), banka.getFax(), banka.getTelefon(),
 				banka.getSWIFT(), new ArrayList<KursnaListaDTO>(), new ArrayList<RacunPravnogLicaDTO>(), 
-				new ArrayList<MedjubankarskiTransferDTO>(), new ArrayList<MedjubankarskiTransferDTO>());
+				new ArrayList<PorukaDTO>(), new ArrayList<PorukaDTO>());
 	}
 
 	public int getId() {
@@ -152,19 +152,19 @@ public class BankaDTO implements Serializable {
 		this.racunPravnogLica = racunPravnogLica;
 	}
 
-	public ArrayList<MedjubankarskiTransferDTO> getBankaNalogodavac() {
+	public ArrayList<PorukaDTO> getBankaNalogodavac() {
 		return bankaNalogodavac;
 	}
 
-	public void setBankaNalogodavac(ArrayList<MedjubankarskiTransferDTO> bankaNalogodavac) {
+	public void setBankaNalogodavac(ArrayList<PorukaDTO> bankaNalogodavac) {
 		this.bankaNalogodavac = bankaNalogodavac;
 	}
 
-	public ArrayList<MedjubankarskiTransferDTO> getBankaPoverilac() {
+	public ArrayList<PorukaDTO> getBankaPoverilac() {
 		return bankaPoverilac;
 	}
 
-	public void setBankaPoverilac(ArrayList<MedjubankarskiTransferDTO> bankaPoverilac) {
+	public void setBankaPoverilac(ArrayList<PorukaDTO> bankaPoverilac) {
 		this.bankaPoverilac = bankaPoverilac;
 	}
 

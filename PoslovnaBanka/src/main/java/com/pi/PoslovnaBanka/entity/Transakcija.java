@@ -2,19 +2,14 @@ package com.pi.PoslovnaBanka.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -67,17 +62,17 @@ public class Transakcija implements Serializable {
 	@Column(name = "iznos", unique = false, nullable = false)
 	private double iznos;
 	
-	@Column(name = "tip_greske", unique = false, nullable = false)
+	@Column(name = "tip_greske", unique = false, nullable = true)
 	private TipGreske tipGreske;
 	
-	@Column(name = "status", unique = false, nullable = false)
+	@Column(name = "status", unique = false, nullable = true)
 	private Status status;
 	
 	@Column(name = "smer", unique = false, nullable = false)
 	private SmerTransakcije smer;
 	
 	@ManyToOne
-    @JoinColumn(name = "naseljeno_mesto", referencedColumnName = "naseljeno_mesto_id", nullable=false)
+    @JoinColumn(name = "naseljeno_mesto", referencedColumnName = "naseljeno_mesto_id", nullable=true)
 	private NaseljenoMesto naseljenoMesto;
 	
 	@ManyToOne

@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.pi.PoslovnaBanka.entity.Klijent;
+import com.pi.PoslovnaBanka.dto.KlijentDTO;
 
 public interface KlijentServiceInterface {
 
-	Klijent findOne(int id);
-	List<Klijent> findAll();
-	Page<Klijent> findAll(int page, int size);
-	int save(Klijent banka);
+	KlijentDTO findOne(int id);
+	List<KlijentDTO> findAll();
+	Page<KlijentDTO> findAll(int page, int size);
+	int save(KlijentDTO banka);
 	boolean remove(int id);
 
 }

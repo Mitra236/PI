@@ -39,7 +39,7 @@ public class DnevnoStanjeDTO implements Serializable {
 	public DnevnoStanjeDTO(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
 		this(dnevnoStanjeRacuna.getBrojIzvoda(), dnevnoStanjeRacuna.getDatumPoslednjegPrometa(), dnevnoStanjeRacuna.getPrethodnoStanje(),
 				dnevnoStanjeRacuna.getPrometUKorist(), dnevnoStanjeRacuna.getPrometNaTeret(), dnevnoStanjeRacuna.getTrenutnoStanje(),
-				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), new TransakcijaDTO(dnevnoStanjeRacuna.getTransakcija()));
+				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), (dnevnoStanjeRacuna.getTransakcija() != null ? new TransakcijaDTO(dnevnoStanjeRacuna.getTransakcija()) : new TransakcijaDTO()));
 	}
 
 	public int getBrojIzvoda() {
