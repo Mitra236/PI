@@ -19,13 +19,14 @@ public class BankaDTO implements Serializable {
 	private String fax;
 	private String telefon;
 	private String SWIFT;
+	private double stanje;
 	private ArrayList<KursnaListaDTO> kursnaLista = new ArrayList<KursnaListaDTO>();
 	private ArrayList<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
 	private ArrayList<PorukaDTO> bankaNalogodavac = new ArrayList<PorukaDTO>();
 	private ArrayList<PorukaDTO> bankaPoverilac = new ArrayList<PorukaDTO>();
 	
 	public BankaDTO(int id, String sifraBanke, String naziv, String pIB, String adresa, String email, String web,
-			String fax, String telefon, String sWIFT, ArrayList<KursnaListaDTO> kursnaLista,
+			String fax, String telefon, String sWIFT, double stanje, ArrayList<KursnaListaDTO> kursnaLista,
 			ArrayList<RacunPravnogLicaDTO> racunPravnogLica, ArrayList<PorukaDTO> bankaNalogodavac,
 			ArrayList<PorukaDTO> bankaPoverilac) {
 		super();
@@ -52,7 +53,7 @@ public class BankaDTO implements Serializable {
 	public BankaDTO(Banka banka) {
 		this(banka.getId(), banka.getSifraBanke(), banka.getNaziv(), banka.getPIB(), 
 				banka.getAdresa(), banka.getEmail(), banka.getWeb(), banka.getFax(), banka.getTelefon(),
-				banka.getSWIFT(), new ArrayList<KursnaListaDTO>(), new ArrayList<RacunPravnogLicaDTO>(), 
+				banka.getSWIFT(), banka.getStanje(), new ArrayList<KursnaListaDTO>(), new ArrayList<RacunPravnogLicaDTO>(), 
 				new ArrayList<PorukaDTO>(), new ArrayList<PorukaDTO>());
 	}
 
@@ -170,5 +171,13 @@ public class BankaDTO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public double getStanje() {
+		return stanje;
+	}
+
+	public void setStanje(double stanje) {
+		this.stanje = stanje;
 	}
 }

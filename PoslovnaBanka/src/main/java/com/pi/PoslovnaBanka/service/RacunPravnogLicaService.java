@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 import com.pi.PoslovnaBanka.entity.Banka;
@@ -51,11 +52,21 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	}
 
 	@Override
+	@Transactional
 	public int save(RacunPravnogLicaDTO racunPravnogLica) {
 		RacunPravnogLica racun = new RacunPravnogLica();
-		Klijent klijent = klijentRepo.findById(racunPravnogLica.getKlijent().getId()).orElse(null);
+		Klijent klijent = new Klijent();
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
 		Banka banka = bankaRepo.findById(racunPravnogLica.getBanka().getId()).orElse(null);
+		
+		klijent.setAdresa(racunPravnogLica.getKlijent().getAdresa());
+		klijent.setIme(racunPravnogLica.getKlijent().getIme());
+		klijent.setPrezime(racunPravnogLica.getKlijent().getPrezime());
+		klijent.setJMBG(racunPravnogLica.getKlijent().getJMBG());
+		klijent.setEmail(racunPravnogLica.getKlijent().getEmail());
+		klijent.setUloga(racunPravnogLica.getKlijent().getUloga());
+		klijentRepo.save(klijent);
+		
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
@@ -76,4 +87,8 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		return new RacunPravnogLicaDTO(racunPravnogLicaRepo.getAccountByUser(client));
 	}
 
+	@Override
+	public RacunPravnogLicaDTO getAccountByUserAndAccountNumber(int id, String number) {
+		return new RacunPravnogLicaDTO(racunPravnogLicaRepo.getAccountByUserAndAccountNumber(id, number));
+	}
 }

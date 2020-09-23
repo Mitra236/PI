@@ -55,6 +55,9 @@ public class Banka implements Serializable {
 	@Column(name = "swift", unique = false, nullable = false)
 	private String SWIFT;
 	
+	@Column(name = "stanje", unique = false, nullable = false)
+	private double stanje;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "banka")
 	private Set<KursnaLista> kursnaLista = new HashSet<KursnaLista>();
 	
@@ -71,11 +74,10 @@ public class Banka implements Serializable {
 		super();
 		
 	}
-
-	public Banka(int id, String sifraBanke, String naziv, String pIB, String adresa, String email, String web,
-			String fax, String telefon, String sWIFT, Set<KursnaLista> kursnaLista,
-			Set<RacunPravnogLica> racunPravnogLica, Set<Poruka> bankaNalogodavac,
-			Set<Poruka> bankaPoverilac) {
+	
+	public Banka(int id, String sifraBanke, String naziv, String pIB, String adresa, @Email String email, String web,
+			String fax, String telefon, String sWIFT, double stanje, Set<KursnaLista> kursnaLista,
+			Set<RacunPravnogLica> racunPravnogLica, Set<Poruka> bankaNalogodavac, Set<Poruka> bankaPoverilac) {
 		super();
 		this.id = id;
 		this.sifraBanke = sifraBanke;
@@ -87,12 +89,15 @@ public class Banka implements Serializable {
 		this.fax = fax;
 		this.telefon = telefon;
 		SWIFT = sWIFT;
+		this.stanje = stanje;
 		this.kursnaLista = kursnaLista;
 		this.racunPravnogLica = racunPravnogLica;
 		this.bankaNalogodavac = bankaNalogodavac;
 		this.bankaPoverilac = bankaPoverilac;
 	}
-	
+
+
+
 	public Banka(int id, String naziv) {
 		this.id = id;
 		this.naziv = naziv;
@@ -208,5 +213,13 @@ public class Banka implements Serializable {
 
 	public void setBankaPoverilac(Set<Poruka> bankaPoverilac) {
 		this.bankaPoverilac = bankaPoverilac;
+	}
+
+	public double getStanje() {
+		return stanje;
+	}
+
+	public void setStanje(double stanje) {
+		this.stanje = stanje;
 	}
 }

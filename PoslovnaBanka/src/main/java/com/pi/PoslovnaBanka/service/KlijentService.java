@@ -12,13 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.dto.KlijentDTO;
 import com.pi.PoslovnaBanka.entity.Klijent;
+import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.repository.KlijentRepository;
+import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 
 @Service
 public class KlijentService implements KlijentServiceInterface {
 	
 	@Autowired
 	KlijentRepository klijentRepo;
+	
+	@Autowired
+	RacunPravnogLicaRepository racunPravnogLicaRepo;
 
 	@Override
 	public KlijentDTO findOne(int id) {
@@ -66,6 +71,12 @@ public class KlijentService implements KlijentServiceInterface {
 			klijentDTOs.add(new KlijentDTO(k));
 		}
 		return klijentDTOs;
+	}
+
+	@Override
+	public KlijentDTO getUserByAccountNumber(String number) {
+		Klijent klijent = klijentRepo.getUserByAccountNumber(number);
+		return new KlijentDTO(klijent);
 	}
 
 }

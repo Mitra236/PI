@@ -1,6 +1,7 @@
 package com.pi.PoslovnaBanka.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,14 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.dto.TransakcijaDTO;
+import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 import com.pi.PoslovnaBanka.entity.Klijent;
-import com.pi.PoslovnaBanka.entity.Status;
-import com.pi.PoslovnaBanka.entity.TipGreske;
+import com.pi.PoslovnaBanka.entity.Poruka;
+import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Transakcija;
-import com.pi.PoslovnaBanka.entity.VrstaPlacanja;
+import com.pi.PoslovnaBanka.entity.VrstaPoruke;
+import com.pi.PoslovnaBanka.repository.BankaRepository;
 import com.pi.PoslovnaBanka.repository.DnevnoStanjeRacunaRepository;
 import com.pi.PoslovnaBanka.repository.KlijentRepository;
+import com.pi.PoslovnaBanka.repository.MedjubankarskiTransferRepository;
+import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 import com.pi.PoslovnaBanka.repository.TransakcijaRepository;
 import com.pi.PoslovnaBanka.repository.ValutaRepository;
 import com.pi.PoslovnaBanka.repository.VrstaPlacanjaRepository;
@@ -39,7 +44,16 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	
 	@Autowired
 	DnevnoStanjeRacunaRepository dnevnoStanje;
-
+	
+	@Autowired
+	BankaRepository bankaRepo;
+	
+	@Autowired
+	RacunPravnogLicaRepository racunPravnogLicaRepo;
+	
+	@Autowired
+	MedjubankarskiTransferRepository porukaRepo;
+	
 	@Override
 	public Transakcija findOne(int id) {
 		return transakcijaRepo.findById(id).orElse(null);
@@ -53,12 +67,16 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	@Override
 	public int save(TransakcijaDTO transakcijaDTO) {
 		Transakcija transakcija = new Transakcija();
-		transakcija.setDuznik(transakcijaDTO.getDuznik());
+		Klijent duznik = klijentRepo.findById(Integer.parseInt(transakcijaDTO.getDuznik())).orElse(null);
+		Klijent poverilac = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunPoverioca());
+		
+		transakcija.setDuznik(duznik.getIme() + " " + duznik.getPrezime());
 		transakcija.setPoverilac(transakcijaDTO.getPoverilac());
 		transakcija.setSvrhaPlacanja(transakcijaDTO.getSvrhaPlacanja());
-		transakcija.setDatumPrijema((Date) new java.util.Date());
-		transakcija.setDatumValute((Date) new java.util.Date());
+		transakcija.setDatumPrijema(Date.valueOf(LocalDate.now()));
+		transakcija.setDatumValute(Date.valueOf(LocalDate.now()));
 		transakcija.setRacunDuznika(transakcijaDTO.getRacunDuznika());
+		transakcija.setRacunPoverioca(transakcijaDTO.getRacunPoverioca());
 		
 		if(transakcijaDTO.getModelZaduzenja() == 0) {
 			transakcija.setModelZaduzenja(289);
@@ -74,14 +92,60 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			transakcija.setModelOdobrenja(transakcijaDTO.getModelOdobrenja());
 		}
 		
+//		transakcija.setValuta(transakcijaDTO.getValuta());
 		transakcija.setPozivNaBrojOdobrenja(transakcijaDTO.getPozivNaBrojOdobrenja());
-		transakcija.setIznos(transakcijaDTO.getIznos() + 15); //provizija za online placanja uz iznos
+		double amount = transakcijaDTO.getIznos() + 15; //provizija za online placanja
+		transakcija.setIznos(amount);
 		transakcija.setHitno(transakcijaDTO.isHitno());
 		transakcija.setSmer(transakcijaDTO.getSmerTransakcije());
 		
-		DnevnoStanjeRacuna dnevnoStanjeRacuna = dnevnoStanje.getStateByUserId(Integer.parseInt(transakcijaDTO.getDuznik()));
+		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanje.getStateByUserId(duznik.getId());
 		
-		Klijent klijent = klijentRepo.findById(Integer.parseInt(transakcijaDTO.getDuznik())).orElse(null);
+		if(dnevnoStanjeRacunaDuznika.getTrenutnoStanje() < transakcijaDTO.getIznos()) {
+			try {
+				throw new Exception("Nemate dovoljno novca na racunu");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			dnevnoStanjeRacunaDuznika.setTrenutnoStanje(dnevnoStanjeRacunaDuznika.getTrenutnoStanje() - amount);
+			dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + amount);
+			dnevnoStanjeRacunaDuznika.setDatumPoslednjegPrometa(Date.valueOf(LocalDate.now()));
+			dnevnoStanje.save(dnevnoStanjeRacunaDuznika);
+		}
+		
+		DnevnoStanjeRacuna dnevnoStanjeRacunaPoverioca = dnevnoStanje.getStateByUserId(poverilac.getId());
+		
+		dnevnoStanjeRacunaPoverioca.setTrenutnoStanje(dnevnoStanjeRacunaPoverioca.getTrenutnoStanje() + amount);
+		dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometUKorist() + amount);
+		dnevnoStanjeRacunaDuznika.setDatumPoslednjegPrometa(Date.valueOf(LocalDate.now()));
+		dnevnoStanje.save(dnevnoStanjeRacunaPoverioca);
+		
+		RacunPravnogLica racunDuznika = racunPravnogLicaRepo.getAccountByUserAndAccountNumber(duznik.getId(), transakcijaDTO.getRacunDuznika());
+		RacunPravnogLica racunPoverioca = racunPravnogLicaRepo.getAccountByUserAndAccountNumber(poverilac.getId(), transakcijaDTO.getRacunPoverioca());
+		
+		if(racunDuznika.getBanka() != racunPoverioca.getBanka()) {
+			Poruka poruka = new Poruka();
+			poruka.setUkupanIznos(amount);
+			poruka.setRacunNalogodavca(racunDuznika.getBanka());
+			poruka.setRacunPoverioca(racunPoverioca.getBanka());
+			
+			if(amount < 118000) {
+				poruka.setTip(VrstaPoruke.MT102);
+			} else {
+				poruka.setTip(VrstaPoruke.MT103);
+			}
+			
+			porukaRepo.save(poruka);
+			
+			Banka bankaNalogodavac = bankaRepo.findById(racunDuznika.getBanka().getId()).orElse(null);
+			bankaNalogodavac.setStanje(bankaNalogodavac.getStanje() - amount);
+			bankaRepo.save(bankaNalogodavac);
+			
+			Banka bankaPoverilac = bankaRepo.findById(racunPoverioca.getBanka().getId()).orElse(null);
+			bankaPoverilac.setStanje(bankaPoverilac.getStanje() + amount);
+			bankaRepo.save(bankaPoverilac);		
+		}
 		
 		return transakcijaRepo.save(transakcija).getBrojStavke();
 	}

@@ -68,7 +68,7 @@ public class Transakcija implements Serializable {
 	@Column(name = "status", unique = false, nullable = true)
 	private Status status;
 	
-	@Column(name = "smer", unique = false, nullable = false)
+	@Column(name = "smer", unique = false, nullable = true)
 	private SmerTransakcije smer;
 	
 	@ManyToOne
@@ -76,11 +76,11 @@ public class Transakcija implements Serializable {
 	private NaseljenoMesto naseljenoMesto;
 	
 	@ManyToOne
-    @JoinColumn(name = "valuta", referencedColumnName = "valuta_id", nullable=false)
+    @JoinColumn(name = "valuta", referencedColumnName = "valuta_id", nullable=true)
 	private Valuta valuta;
 	
 	@ManyToOne
-    @JoinColumn(name = "dnevno_stanje_racuna", referencedColumnName = "dnevno_stanje_racuna_id", nullable=false)
+    @JoinColumn(name = "dnevno_stanje_racuna", referencedColumnName = "dnevno_stanje_racuna_id", nullable=true)
 	private DnevnoStanjeRacuna dnevnoStanjeRacuna;
 	
 	@ManyToOne

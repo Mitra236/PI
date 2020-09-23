@@ -1,6 +1,6 @@
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift) VALUES ("340", "ERSTE BANK", "101626723", "Bulevar Oslobodjenja 7 21102 Novi Sad", "erstebank@email.rs", "www.erstebank.rs", "+381 (0)21 489 06 65", "0800 201 201", "GIBARS22")
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift) VALUES ("160", "BANCA INTESA", "100001159", "Bulevar Mihajla Pupina 4a 21102 Novi Sad", "bancaintesa@email.rs", "www.bancaintesa.rs", "+381 11 310 88 55 ", "+ 381 11 3108888", "DBDBRSBG")
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift) VALUES ("170", "UNICREDIT BANK SRBIJA", "27324919", "Narodnog Fronta 21 21102 Novi Sad", "unicredit@email.rs", "www.unicreditbank.rs", "+021/ 48 03 105", "(381)11-320-4500", "BACXRSBG")
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("340", "ERSTE BANK", "101626723", "Bulevar Oslobodjenja 7 21102 Novi Sad", "erstebank@email.rs", "www.erstebank.rs", "+381 (0)21 489 06 65", "0800 201 201", "GIBARS22", 500000)
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("160", "BANCA INTESA", "100001159", "Bulevar Mihajla Pupina 4a 21102 Novi Sad", "bancaintesa@email.rs", "www.bancaintesa.rs", "+381 11 310 88 55 ", "+ 381 11 3108888", "DBDBRSBG", 800000)
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("170", "UNICREDIT BANK SRBIJA", "27324919", "Narodnog Fronta 21 21102 Novi Sad", "unicredit@email.rs", "www.unicreditbank.rs", "+021/ 48 03 105", "(381)11-320-4500", "BACXRSBG", 10000000)
 
 INSERT INTO klijenti(ime, prezime, JMBG, email, telefon, adresa, uloga) VALUES ("Pera", "Peric", "7234567891734", "pera@gmail.com", "+38138856385", "Adresa", 0)
 INSERT INTO klijenti(ime, prezime, JMBG, email, telefon, adresa, uloga) VALUES ("Zika", "Zikic", "1234567891934", "zika@gmail.com", "+38138855385", "Adresa2", 1)
@@ -28,7 +28,6 @@ INSERT INTO vrste_placanja(oznaka_vrste, naziv_vrste) VALUES ("48859", "kreditna
 
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-14", 13000, 15000, 11000, 17000, 1)
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-13", 57000, 89000, 18000, 100000, 2)
-INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-11", 33000, 35000, 11000, 50000, 2)
 
 --INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("maki", "svrha", "betmen", "2019-07-23", "2019-08-08", "1234 5954 3882 9394", 97, "392439248", "43284329048230", 97, "432948329843", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
 

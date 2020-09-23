@@ -66,4 +66,12 @@ public class RacunController {
 		return new ResponseEntity<DnevnoStanjeDTO>(dnevnoStanjeDTO, HttpStatus.OK);
 	}
 
+	@GetMapping(value="/client-and-number")
+	private ResponseEntity<RacunPravnogLicaDTO> getAccountByClientAndNumber(@RequestParam("id") int id, @RequestParam("number") String number) {
+		RacunPravnogLicaDTO racunPravnogLica = racunPravnogLicaServiceInterface.getAccountByUserAndAccountNumber(id, number);
+		if (racunPravnogLica == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(racunPravnogLica, HttpStatus.OK);
+	}
 }

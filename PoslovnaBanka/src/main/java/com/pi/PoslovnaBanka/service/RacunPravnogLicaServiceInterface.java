@@ -11,4 +11,5 @@ public interface RacunPravnogLicaServiceInterface {
 	int save(RacunPravnogLicaDTO racunPravnogLica);
 	boolean remove(int id);
 	RacunPravnogLicaDTO getAccountByUser(int client);
+	RacunPravnogLicaDTO getAccountByUserAndAccountNumber(int id, String number);
 }
