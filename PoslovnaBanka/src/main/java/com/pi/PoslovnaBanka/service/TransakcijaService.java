@@ -92,7 +92,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			transakcija.setModelOdobrenja(transakcijaDTO.getModelOdobrenja());
 		}
 		
-//		transakcija.setValuta(transakcijaDTO.getValuta());
+		transakcija.setValuta(valutaRepo.findById(transakcijaDTO.getValuta().getId()).orElse(null));
 		transakcija.setPozivNaBrojOdobrenja(transakcijaDTO.getPozivNaBrojOdobrenja());
 		double amount = transakcijaDTO.getIznos() + 15; //provizija za online placanja
 		transakcija.setIznos(amount);
@@ -117,8 +117,8 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 		DnevnoStanjeRacuna dnevnoStanjeRacunaPoverioca = dnevnoStanje.getStateByUserId(poverilac.getId());
 		
 		dnevnoStanjeRacunaPoverioca.setTrenutnoStanje(dnevnoStanjeRacunaPoverioca.getTrenutnoStanje() + amount);
-		dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometUKorist() + amount);
-		dnevnoStanjeRacunaDuznika.setDatumPoslednjegPrometa(Date.valueOf(LocalDate.now()));
+		dnevnoStanjeRacunaPoverioca.setPrometNaTeret(dnevnoStanjeRacunaPoverioca.getPrometUKorist() + amount);
+		dnevnoStanjeRacunaPoverioca.setDatumPoslednjegPrometa(Date.valueOf(LocalDate.now()));
 		dnevnoStanje.save(dnevnoStanjeRacunaPoverioca);
 		
 		RacunPravnogLica racunDuznika = racunPravnogLicaRepo.getAccountByUserAndAccountNumber(duznik.getId(), transakcijaDTO.getRacunDuznika());

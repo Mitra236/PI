@@ -79,4 +79,10 @@ public class KlijentService implements KlijentServiceInterface {
 		return new KlijentDTO(klijent);
 	}
 
+	@Override
+	public KlijentDTO login(KlijentDTO klijentDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

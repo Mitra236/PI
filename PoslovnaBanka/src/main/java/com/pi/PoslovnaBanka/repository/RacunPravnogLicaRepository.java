@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.pi.PoslovnaBanka.entity.Klijent;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 
 public interface RacunPravnogLicaRepository extends JpaRepository<RacunPravnogLica, Integer>{

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 import com.pi.PoslovnaBanka.entity.Banka;
+import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 import com.pi.PoslovnaBanka.entity.Klijent;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Valuta;
@@ -20,6 +21,7 @@ import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 import com.pi.PoslovnaBanka.repository.ValutaRepository;
 
 @Service
+@Transactional
 public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface {
 	
 	@Autowired
@@ -56,6 +58,8 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	public int save(RacunPravnogLicaDTO racunPravnogLica) {
 		RacunPravnogLica racun = new RacunPravnogLica();
 		Klijent klijent = new Klijent();
+		DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna();
+		
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
 		Banka banka = bankaRepo.findById(racunPravnogLica.getBanka().getId()).orElse(null);
 		
@@ -66,6 +70,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		klijent.setEmail(racunPravnogLica.getKlijent().getEmail());
 		klijent.setUloga(racunPravnogLica.getKlijent().getUloga());
 		klijentRepo.save(klijent);
+		
 		
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
