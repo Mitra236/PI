@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.dto.KlijentDTO;
 import com.pi.PoslovnaBanka.entity.Klijent;
-import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.repository.KlijentRepository;
 import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 

@@ -26,12 +26,27 @@ public class ReportsController {
 	ReportsServiceInterface reports;
 	
 	@GetMapping
-	public ResponseEntity getReport(String racun, Date od_datuma, Date do_datuma) throws Throwable, IOException, SQLException{
+	public ResponseEntity<InputStreamResource> getReport(String racun, Date od_datuma, Date do_datuma) throws Throwable, IOException, SQLException{
 		
 		ByteArrayInputStream bis = reports.getReports(racun, od_datuma, do_datuma);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+		headers.add("Content-Disposition", "inline; filename=time_range_report.pdf");
+
+		return ResponseEntity
+	       		.ok()
+	       		.headers(headers)
+	       		.contentType(MediaType.APPLICATION_PDF)
+	       		.body(new InputStreamResource(bis));
+	}
+	
+	@GetMapping("/bank-report")
+	public ResponseEntity<InputStreamResource> getBankReport() throws Throwable, IOException, SQLException{
+		
+		ByteArrayInputStream bis = reports.getBankReports();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename=bank_report.pdf");
 
 		return ResponseEntity
 	       		.ok()

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 import com.pi.PoslovnaBanka.entity.Banka;
-import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 import com.pi.PoslovnaBanka.entity.Klijent;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Valuta;
@@ -58,7 +57,9 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	public int save(RacunPravnogLicaDTO racunPravnogLica) {
 		RacunPravnogLica racun = new RacunPravnogLica();
 		Klijent klijent = new Klijent();
-		DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna();
+		//TO-DO
+		//add daily account state
+		//DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna(); 
 		
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
 		Banka banka = bankaRepo.findById(racunPravnogLica.getBanka().getId()).orElse(null);

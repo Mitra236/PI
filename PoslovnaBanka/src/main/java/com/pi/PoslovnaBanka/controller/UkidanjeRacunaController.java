@@ -25,7 +25,7 @@ public class UkidanjeRacunaController {
 	UkidanjeServiceInterface ukidanjeServiceInterface;
 	
 	@GetMapping()
-	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLicaDTO,@RequestParam("id") int id) {
+	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLicaDTO, @RequestParam("id") int id) {
 		RacunPravnogLicaDTO racunPravnogLica = racunPravnogLicaServiceInterface.findOne(id);
 		if (racunPravnogLica == null) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

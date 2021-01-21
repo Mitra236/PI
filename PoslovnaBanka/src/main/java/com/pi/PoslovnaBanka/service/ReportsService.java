@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +24,6 @@ public class ReportsService implements ReportsServiceInterface{
 		map.put("racun_duznika", racun);
 		map.put("od_datuma", od_datuma);
 		map.put("do_datuma", do_datuma);
-		System.out.println(map.get("od_datuma"));
 		JasperPrint jp = JasperFillManager.fillReport(
 			getClass().getResource("/jasper/Blank_A4.jasper").openStream(),
 			map, DriverManager.getConnection("jdbc:mysql://localhost:3306/piDatabase", "root", "root"));
@@ -33,5 +31,14 @@ public class ReportsService implements ReportsServiceInterface{
 		
 		return bis;
 	}
-
+	
+	@Override
+	public ByteArrayInputStream getBankReports() throws JRException, IOException, SQLException {
+		JasperPrint jp = JasperFillManager.fillReport(
+			getClass().getResource("/jasper/BankReport.jasper").openStream(),
+			null, DriverManager.getConnection("jdbc:mysql://localhost:3306/piDatabase", "root", "root"));
+		ByteArrayInputStream bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
+		
+		return bis;
+	}
 }
