@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.pi.PoslovnaBanka.entity.Klijent;
+import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Uloga;
 
 public class KlijentDTO implements Serializable {
@@ -37,6 +38,14 @@ public class KlijentDTO implements Serializable {
 	public KlijentDTO(Klijent klijent) {
 		this(klijent.getId(), klijent.getIme(), klijent.getPrezime(), klijent.getJMBG(), klijent.getEmail(), klijent.getTelefon(),
 				klijent.getAdresa(), klijent.getUloga(), new ArrayList<RacunPravnogLicaDTO>());
+		
+		ArrayList<RacunPravnogLicaDTO> racuni = new ArrayList<RacunPravnogLicaDTO>();
+		
+		for(RacunPravnogLica r : klijent.getRacunPravnogLica()) {
+			racuni.add(new RacunPravnogLicaDTO(r));
+		}
+		
+		this.setRacunPravnogLica(racuni);
 	}
 
 	public int getId() {
