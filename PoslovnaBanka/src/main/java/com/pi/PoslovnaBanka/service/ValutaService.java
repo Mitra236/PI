@@ -1,10 +1,12 @@
 package com.pi.PoslovnaBanka.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pi.PoslovnaBanka.dto.ValutaDTO;
 import com.pi.PoslovnaBanka.entity.Valuta;
 import com.pi.PoslovnaBanka.repository.ValutaRepository;
 
@@ -20,8 +22,12 @@ public class ValutaService implements ValutaServiceInterface {
 	}
 
 	@Override
-	public List<Valuta> findAll() {
-		return valutaRepo.findAll();
+	public List<ValutaDTO> findAll() {
+		List<ValutaDTO> valutaDTO = new ArrayList<ValutaDTO>();
+		for(Valuta d: valutaRepo.findAll()) {
+			valutaDTO.add(new ValutaDTO(d));
+		}
+		return valutaDTO;
 	}
 
 	@Override

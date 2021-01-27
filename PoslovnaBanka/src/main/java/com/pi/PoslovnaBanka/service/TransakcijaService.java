@@ -67,6 +67,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	@Override
 	public int save(TransakcijaDTO transakcijaDTO) {
 		Transakcija transakcija = new Transakcija();
+		System.out.println(transakcijaDTO.getDuznik());
 		Klijent duznik = klijentRepo.findById(Integer.parseInt(transakcijaDTO.getDuznik())).orElse(null);
 		Klijent poverilac = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunPoverioca());
 		
@@ -138,6 +139,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			
 			porukaRepo.save(poruka);
 			
+			//poruka u paketu
 			Banka bankaNalogodavac = bankaRepo.findById(racunDuznika.getBanka().getId()).orElse(null);
 			bankaNalogodavac.setStanje(bankaNalogodavac.getStanje() - amount);
 			bankaRepo.save(bankaNalogodavac);

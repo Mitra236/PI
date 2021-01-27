@@ -29,7 +29,7 @@ public class ReportsController {
 	public ResponseEntity<InputStreamResource> getReport(String racun, Date od_datuma, Date do_datuma) throws Throwable, IOException, SQLException{
 		
 		ByteArrayInputStream bis = reports.getReports(racun, od_datuma, do_datuma);
-		
+		System.out.println(bis);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=time_range_report.pdf");
 
