@@ -68,7 +68,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	public int save(TransakcijaDTO transakcijaDTO) {
 		Transakcija transakcija = new Transakcija();
 		System.out.println(transakcijaDTO.getDuznik());
-		Klijent duznik = klijentRepo.findById(Integer.parseInt(transakcijaDTO.getDuznik())).orElse(null);
+		Klijent duznik = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunDuznika());
 		Klijent poverilac = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunPoverioca());
 		
 		transakcija.setDuznik(duznik.getIme() + " " + duznik.getPrezime());

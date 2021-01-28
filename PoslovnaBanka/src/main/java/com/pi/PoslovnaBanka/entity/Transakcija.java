@@ -47,7 +47,7 @@ public class Transakcija implements Serializable {
 	@Column(name = "poziv_na_broj_zaduzenja", unique = true, nullable = false)
 	private String pozivNaBrojZaduzenja;
 	
-	@Column(name = "racun_poverioca", unique = true, nullable = false)
+	@Column(name = "racun_poverioca", unique = false, nullable = false)
 	private String racunPoverioca;
 	
 	@Column(name = "model_odobrenja", unique = false, nullable = false)
