@@ -65,13 +65,17 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	}
 
 	@Override
-	public int save(TransakcijaDTO transakcijaDTO) {
+	public int save(TransakcijaDTO transakcijaDTO) throws Exception {
 		Transakcija transakcija = new Transakcija();
 		System.out.println(transakcijaDTO.getDuznik());
 		Klijent duznik = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunDuznika());
 		Klijent poverilac = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunPoverioca());
 		
-		transakcija.setDuznik(duznik.getIme() + " " + duznik.getPrezime());
+		if(duznik == null || poverilac == null) {
+			throw new Exception("Uneli ste pogresan broj racuna, molimo vas pokusajte ponovo.");
+		}
+		
+		transakcija.setDuznik(transakcijaDTO.getDuznik());
 		transakcija.setPoverilac(transakcijaDTO.getPoverilac());
 		transakcija.setSvrhaPlacanja(transakcijaDTO.getSvrhaPlacanja());
 		transakcija.setDatumPrijema(Date.valueOf(LocalDate.now()));
@@ -93,7 +97,6 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			transakcija.setModelOdobrenja(transakcijaDTO.getModelOdobrenja());
 		}
 		
-		transakcija.setValuta(valutaRepo.findById(transakcijaDTO.getValuta().getId()).orElse(null));
 		transakcija.setPozivNaBrojOdobrenja(transakcijaDTO.getPozivNaBrojOdobrenja());
 		double amount = transakcijaDTO.getIznos() + 15; //provizija za online placanja
 		transakcija.setIznos(amount);
@@ -105,9 +108,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 		if(dnevnoStanjeRacunaDuznika.getTrenutnoStanje() < transakcijaDTO.getIznos()) {
 			try {
 				throw new Exception("Nemate dovoljno novca na racunu");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			} catch (Exception e) {}
 		} else {
 			dnevnoStanjeRacunaDuznika.setTrenutnoStanje(dnevnoStanjeRacunaDuznika.getTrenutnoStanje() - amount);
 			dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + amount);
@@ -117,13 +118,18 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 		
 		DnevnoStanjeRacuna dnevnoStanjeRacunaPoverioca = dnevnoStanje.getStateByUserId(poverilac.getId());
 		
-		dnevnoStanjeRacunaPoverioca.setTrenutnoStanje(dnevnoStanjeRacunaPoverioca.getTrenutnoStanje() + amount);
-		dnevnoStanjeRacunaPoverioca.setPrometNaTeret(dnevnoStanjeRacunaPoverioca.getPrometUKorist() + amount);
+		dnevnoStanjeRacunaPoverioca.setTrenutnoStanje(dnevnoStanjeRacunaPoverioca.getTrenutnoStanje() + transakcijaDTO.getIznos());
+		dnevnoStanjeRacunaPoverioca.setPrometNaTeret(dnevnoStanjeRacunaPoverioca.getPrometUKorist() + transakcijaDTO.getIznos());
 		dnevnoStanjeRacunaPoverioca.setDatumPoslednjegPrometa(Date.valueOf(LocalDate.now()));
 		dnevnoStanje.save(dnevnoStanjeRacunaPoverioca);
 		
 		RacunPravnogLica racunDuznika = racunPravnogLicaRepo.getAccountByUserAndAccountNumber(duznik.getId(), transakcijaDTO.getRacunDuznika());
 		RacunPravnogLica racunPoverioca = racunPravnogLicaRepo.getAccountByUserAndAccountNumber(poverilac.getId(), transakcijaDTO.getRacunPoverioca());
+		
+
+		if(transakcijaDTO.getValuta() != null) {
+			transakcija.setValuta(valutaRepo.findById(transakcijaDTO.getValuta().getId()).orElse(null));
+		} else {transakcija.setValuta(racunDuznika.getValuta());}
 		
 		if(racunDuznika.getBanka() != racunPoverioca.getBanka()) {
 			Poruka poruka = new Poruka();

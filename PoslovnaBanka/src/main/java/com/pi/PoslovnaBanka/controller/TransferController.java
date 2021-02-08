@@ -21,12 +21,18 @@ public class TransferController {
 	TransakcijaServiceInterface transakcijaServiceInterface;
 	
 	@PostMapping(consumes="application/json")
-	private ResponseEntity<TransakcijaDTO> saveTransaction(@RequestBody TransakcijaDTO transakcijaDTO) {
+	private ResponseEntity<?> saveTransaction(@RequestBody TransakcijaDTO transakcijaDTO) {
 		if(transakcijaDTO == null) {
 			return new ResponseEntity<TransakcijaDTO>(HttpStatus.NO_CONTENT);
 		}
 		
-		transakcijaServiceInterface.save(transakcijaDTO);
+		
+		try {
+			transakcijaServiceInterface.save(transakcijaDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<TransakcijaDTO>(HttpStatus.OK);
 	}
 }

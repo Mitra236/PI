@@ -9,6 +9,6 @@ public interface TransakcijaServiceInterface {
 
 	Transakcija findOne(int id);
 	List<Transakcija> findAll();
-	int save(TransakcijaDTO transakcija);
+	int save(TransakcijaDTO transakcija) throws Exception ;
 	boolean remove(int id);
 }
