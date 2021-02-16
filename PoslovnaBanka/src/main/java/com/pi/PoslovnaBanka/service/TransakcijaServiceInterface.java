@@ -7,7 +7,7 @@ import com.pi.PoslovnaBanka.entity.Transakcija;
 
 public interface TransakcijaServiceInterface {
 
-	Transakcija findOne(int id);
+	TransakcijaDTO findOne(int id);
 	List<Transakcija> findAll();
 	int save(TransakcijaDTO transakcija) throws Exception ;
 	boolean remove(int id);

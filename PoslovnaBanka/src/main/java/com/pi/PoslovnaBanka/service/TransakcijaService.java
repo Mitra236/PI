@@ -55,8 +55,8 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	MedjubankarskiTransferRepository porukaRepo;
 	
 	@Override
-	public Transakcija findOne(int id) {
-		return transakcijaRepo.findById(id).orElse(null);
+	public TransakcijaDTO findOne(int id) {
+		return new TransakcijaDTO(transakcijaRepo.findById(id).orElse(null));
 	}
 
 	@Override
