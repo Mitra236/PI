@@ -35,6 +35,9 @@ public class Klijent implements Serializable {
 	@Column(name = "jmbg", unique = true, nullable = false, length = 13)
 	private String JMBG;
 	
+	@Column(name = "lozinka", unique = true, nullable = false)
+	private String lozinka;
+	
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
@@ -55,13 +58,14 @@ public class Klijent implements Serializable {
 		super();
 	}
 
-	public Klijent(int id, String ime, String prezime, String jMBG, @Email String email, String telefon, String adresa,
+	public Klijent(int id, String ime, String prezime, String jMBG, String lozinka, @Email String email, String telefon, String adresa,
 			Uloga uloga, Set<RacunPravnogLica> racunPravnogLica) {
 		super();
 		this.id = id;
 		this.ime = ime;
 		this.prezime = prezime;
 		JMBG = jMBG;
+		this.lozinka = lozinka;
 		this.email = email;
 		this.telefon = telefon;
 		this.adresa = adresa;
@@ -71,6 +75,14 @@ public class Klijent implements Serializable {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getLozinka() {
+		return lozinka;
+	}
+
+	public void setLozinka(String lozinka) {
+		this.lozinka = lozinka;
 	}
 
 	public void setId(int id) {

@@ -41,4 +41,19 @@ public class ReportsService implements ReportsServiceInterface{
 		
 		return bis;
 	}
+	
+	@Override
+	public String getXMLReports(String racun, Date od_datuma, Date do_datuma) throws JRException, IOException, SQLException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("racun_duznika", racun);
+		map.put("od_datuma", od_datuma);
+		map.put("do_datuma", do_datuma);
+		JasperPrint jp = JasperFillManager.fillReport(
+			getClass().getResource("/jasper/Blank_A4.jasper").openStream(),
+			map, DriverManager.getConnection("jdbc:mysql://localhost:3306/piDatabase", "root", "root"));
+		
+		String bis = JasperExportManager.exportReportToXml(jp);
+        
+        return bis;
+	}
 }

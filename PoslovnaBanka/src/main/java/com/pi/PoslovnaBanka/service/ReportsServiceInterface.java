@@ -10,5 +10,6 @@ import net.sf.jasperreports.engine.JRException;
 public interface ReportsServiceInterface {
 
 	ByteArrayInputStream getReports(String racun, Date od_datuma, Date do_datuma) throws JRException, IOException, SQLException;
+	String getXMLReports(String racun, Date od_datuma, Date do_datuma) throws JRException, IOException, SQLException;
 	ByteArrayInputStream getBankReports() throws JRException, IOException, SQLException;
 }

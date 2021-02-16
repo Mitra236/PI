@@ -1,52 +1,34 @@
 package com.pi.PoslovnaBanka.controller;
 
-import java.io.FileInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.pi.PoslovnaBanka.dto.BankaPoNazivuDTO;
-import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 import com.pi.PoslovnaBanka.dto.TransakcijaDTO;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.Duznik;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.Primalac;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.RacunDuznika;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.RacunPrimaoca;
-import com.pi.PoslovnaBanka.dto.xmlDTOs.TestUplatnice;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.Uplata;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.Uplatnica;
 import com.pi.PoslovnaBanka.dto.xmlDTOs.Uplatnice;
-import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.entity.Transakcija;
-import com.pi.PoslovnaBanka.service.BankaServiceInterface;
 import com.pi.PoslovnaBanka.service.TransakcijaServiceInterface;
 import com.pi.PoslovnaBanka.service.XmlServiceInterface;
 

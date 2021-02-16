@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,5 +54,16 @@ public class ReportsController {
 	       		.headers(headers)
 	       		.contentType(MediaType.APPLICATION_PDF)
 	       		.body(new InputStreamResource(bis));
+	}
+	
+	@RequestMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<String> getXMLReport(String racun, Date od_datuma, Date do_datuma) throws Throwable, IOException, SQLException{
+		
+		String jrExporter = reports.getXMLReports(racun, od_datuma, do_datuma);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename=bank_report.xml");
+
+		return new ResponseEntity<String>(jrExporter, HttpStatus.OK);
 	}
 }
