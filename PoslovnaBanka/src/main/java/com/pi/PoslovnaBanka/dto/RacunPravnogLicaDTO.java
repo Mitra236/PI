@@ -17,11 +17,11 @@ public class RacunPravnogLicaDTO implements Serializable {
 	private ValutaDTO valuta;
 	private BankaDTO banka;
 	private UkidanjeDTO ukidanje;
-	private KlijentDTO klijent;
+	private RacunPravnogLicaKlijentDTO klijent;
 	private ArrayList<DnevnoStanjeDTO> dnevnoStanjeRacuna = new ArrayList<DnevnoStanjeDTO>();
 	
 	public RacunPravnogLicaDTO(int id, String brojRacuna, Date datumOtvaranja, boolean vazeci, ValutaDTO valuta,
-			BankaDTO banka, UkidanjeDTO ukidanje, KlijentDTO klijent, ArrayList<DnevnoStanjeDTO> dnevnoStanjeRacuna) {
+			BankaDTO banka, UkidanjeDTO ukidanje, RacunPravnogLicaKlijentDTO klijent, ArrayList<DnevnoStanjeDTO> dnevnoStanjeRacuna) {
 		super();
 		this.id = id;
 		this.brojRacuna = brojRacuna;
@@ -41,7 +41,7 @@ public class RacunPravnogLicaDTO implements Serializable {
 	public RacunPravnogLicaDTO(RacunPravnogLica racunPravnogLica) {
 		this(racunPravnogLica.getId(), racunPravnogLica.getBrojRacuna(), racunPravnogLica.getDatumOtvaranja(), racunPravnogLica.isVazeci(),
 				new ValutaDTO(racunPravnogLica.getValuta()), new BankaDTO(racunPravnogLica.getBanka()),
-				new UkidanjeDTO(racunPravnogLica.getUkidanje()), null, new ArrayList<DnevnoStanjeDTO>());
+				new UkidanjeDTO(racunPravnogLica.getUkidanje()), new RacunPravnogLicaKlijentDTO(racunPravnogLica.getKlijent()), new ArrayList<DnevnoStanjeDTO>());
 	}
 
 	public int getId() {
@@ -100,11 +100,11 @@ public class RacunPravnogLicaDTO implements Serializable {
 		this.ukidanje = ukidanje;
 	}
 
-	public KlijentDTO getKlijent() {
+	public RacunPravnogLicaKlijentDTO getKlijent() {
 		return klijent;
 	}
 
-	public void setKlijent(KlijentDTO klijent) {
+	public void setKlijent(RacunPravnogLicaKlijentDTO klijent) {
 		this.klijent = klijent;
 	}
 
