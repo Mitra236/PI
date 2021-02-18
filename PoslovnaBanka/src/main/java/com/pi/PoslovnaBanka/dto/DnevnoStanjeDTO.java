@@ -3,6 +3,8 @@ package com.pi.PoslovnaBanka.dto;
 import java.io.Serializable;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 
@@ -17,10 +19,10 @@ public class DnevnoStanjeDTO implements Serializable {
 	private double prometNaTeret;
 	private double trenutnoStanje;
 	private RacunPravnogLicaDTO racunPravnogLica;
-	private TransakcijaDTO transakcija;
+	private List<TransakcijaDTO> transakcija;
 	
 	public DnevnoStanjeDTO(int brojIzvoda, Date datumPoslednjegPrometa, double prethodnoStanje, double prometUKorist,
-			double prometNaTeret, double trenutnoStanje, RacunPravnogLicaDTO racunPravnogLica, TransakcijaDTO transakcija) {
+			double prometNaTeret, double trenutnoStanje, RacunPravnogLicaDTO racunPravnogLica, List<TransakcijaDTO> transakcija) {
 		super();
 		this.brojIzvoda = brojIzvoda;
 		this.datumPoslednjegPrometa = datumPoslednjegPrometa;
@@ -39,7 +41,7 @@ public class DnevnoStanjeDTO implements Serializable {
 	public DnevnoStanjeDTO(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
 		this(dnevnoStanjeRacuna.getBrojIzvoda(), dnevnoStanjeRacuna.getDatumPoslednjegPrometa(), dnevnoStanjeRacuna.getPrethodnoStanje(),
 				dnevnoStanjeRacuna.getPrometUKorist(), dnevnoStanjeRacuna.getPrometNaTeret(), dnevnoStanjeRacuna.getTrenutnoStanje(),
-				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), (dnevnoStanjeRacuna.getTransakcija() != null ? new TransakcijaDTO(dnevnoStanjeRacuna.getTransakcija()) : new TransakcijaDTO()));
+				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), new ArrayList());
 	}
 
 	public int getBrojIzvoda() {
@@ -98,11 +100,11 @@ public class DnevnoStanjeDTO implements Serializable {
 		this.racunPravnogLica = racunPravnogLica;
 	}
 
-	public TransakcijaDTO getTransakcija() {
+	public List<TransakcijaDTO> getTransakcija() {
 		return transakcija;
 	}
 
-	public void setTransakcija(TransakcijaDTO transakcija) {
+	public void setTransakcija(List<TransakcijaDTO> transakcija) {
 		this.transakcija = transakcija;
 	}
 

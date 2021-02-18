@@ -44,7 +44,7 @@ public class Transakcija implements Serializable {
 	@Column(name = "model_zaduzenja", unique = false, nullable = false)
 	private int modelZaduzenja;
 	
-	@Column(name = "poziv_na_broj_zaduzenja", unique = true, nullable = false)
+	@Column(name = "poziv_na_broj_zaduzenja", unique = false, nullable = false)
 	private String pozivNaBrojZaduzenja;
 	
 	@Column(name = "racun_poverioca", unique = false, nullable = false)
@@ -53,7 +53,7 @@ public class Transakcija implements Serializable {
 	@Column(name = "model_odobrenja", unique = false, nullable = false)
 	private int modelOdobrenja;
 	
-	@Column(name = "poziv_na_broj_odobrenja", unique = true, nullable = false)
+	@Column(name = "poziv_na_broj_odobrenja", unique = false, nullable = false)
 	private String pozivNaBrojOdobrenja;
 	
 	@Column(name = "hitno", unique = false, nullable = false)

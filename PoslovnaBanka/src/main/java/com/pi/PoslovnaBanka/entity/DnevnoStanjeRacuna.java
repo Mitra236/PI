@@ -2,14 +2,19 @@ package com.pi.PoslovnaBanka.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,16 +47,15 @@ public class DnevnoStanjeRacuna implements Serializable {
     @JoinColumn(name = "racun_pravnog_lica", referencedColumnName = "racun_pravnog_lica_id", nullable=false)
 	private RacunPravnogLica racunPravnogLica;
 	
-	@ManyToOne
-    @JoinColumn(name = "transakcija", referencedColumnName = "transakcija_id", nullable=true)
-	private Transakcija transakcija;
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "dnevnoStanjeRacuna")
+	private List<Transakcija> transakcija;
 	
 	public DnevnoStanjeRacuna() {
 		super();
 	}
 
 	public DnevnoStanjeRacuna(int brojIzvoda, Date datumPoslednjegPrometa, double prethodnoStanje, double prometUKorist,
-			double prometNaTeret, double trenutnoStanje, RacunPravnogLica racunPravnogLica, Transakcija transakcija) {
+			double prometNaTeret, double trenutnoStanje, RacunPravnogLica racunPravnogLica, List<Transakcija>  transakcija) {
 		super();
 		this.brojIzvoda = brojIzvoda;
 		this.datumPoslednjegPrometa = datumPoslednjegPrometa;
@@ -119,11 +123,11 @@ public class DnevnoStanjeRacuna implements Serializable {
 		this.racunPravnogLica = racunPravnogLica;
 	}
 
-	public Transakcija getTransakcija() {
+	public List<Transakcija> getTransakcija() {
 		return transakcija;
 	}
 
-	public void setTransakcija(Transakcija transakcija) {
+	public void setTransakcija(List<Transakcija> transakcija) {
 		this.transakcija = transakcija;
 	}
 }
