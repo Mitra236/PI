@@ -25,12 +25,12 @@ public class UkidanjeRacunaController {
 	UkidanjeServiceInterface ukidanjeServiceInterface;
 	
 	@GetMapping()
-	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLicaDTO, @RequestParam("id") int id) {
-		RacunPravnogLicaDTO racunPravnogLica = racunPravnogLicaServiceInterface.findOne(id);
-		if (racunPravnogLica == null) {
+	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLica, @RequestParam("id") int id) {
+		RacunPravnogLicaDTO racunPravnogLicaa = racunPravnogLicaServiceInterface.findOne(id);
+		if (racunPravnogLicaa == null) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}	
-		ukidanjeServiceInterface.save(racunPravnogLicaDTO, id);	
+		ukidanjeServiceInterface.save(racunPravnogLica, id);	
 		return new ResponseEntity<>(HttpStatus.OK);	
 	}
 }
