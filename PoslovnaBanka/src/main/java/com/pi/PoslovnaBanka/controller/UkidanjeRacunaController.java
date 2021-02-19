@@ -25,12 +25,18 @@ public class UkidanjeRacunaController {
 	UkidanjeServiceInterface ukidanjeServiceInterface;
 	
 	@GetMapping()
-	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLica, @RequestParam("id") int id) {
+	public ResponseEntity<?> deleteAccount(@RequestParam("brojRacuna") String racunPravnogLica, @RequestParam("id") int id) throws Exception {
 		RacunPravnogLicaDTO racunPravnogLicaa = racunPravnogLicaServiceInterface.findOne(id);
 		if (racunPravnogLicaa == null) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-		}	
-		ukidanjeServiceInterface.save(racunPravnogLica, id);	
+		}
+		
+		try {
+			ukidanjeServiceInterface.save(racunPravnogLica, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);	
 	}
 }

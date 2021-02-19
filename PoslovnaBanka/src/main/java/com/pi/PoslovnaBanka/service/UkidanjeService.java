@@ -46,7 +46,7 @@ public class UkidanjeService implements UkidanjeServiceInterface {
 
 	@Override
 	@Transactional
-	public int save(String racunPravnogLicaDTO, int id) {
+	public int save(String racunPravnogLicaDTO, int id) throws Exception {
 		RacunPravnogLica racunPravnogLica = racunPravnogLicaRepo.findById(id).orElse(null);
 		racunPravnogLica.setVazeci(false);
 		racunPravnogLicaRepo.save(racunPravnogLica);
@@ -57,6 +57,10 @@ public class UkidanjeService implements UkidanjeServiceInterface {
 		
 		Klijent pravnoLice = klijentRepo.findById(racunPravnogLica.getKlijent().getId()).orElse(null);
 		Klijent poverilac = klijentRepo.getUserByAccountNumber(racunPravnogLicaDTO);
+		
+		if(poverilac == null) {
+			throw new Exception("Racun na koji zelite da prebacite sredstva je nepostojeci, molimo vas pokusajte ponovo.");
+		}
 		
 		DnevnoStanjeRacuna dnevnoStanjeRacunaPoverioca = dnevnoStanje.getStateByUserId(poverilac.getId());
 		DnevnoStanjeRacuna dnevnoStanjeRacunaPravnogLica = dnevnoStanje.getStateByUserId(pravnoLice.getId());

@@ -7,6 +7,6 @@ public interface UkidanjeServiceInterface {
 
 	Ukidanje findOne(int id);
 	List<Ukidanje> findAll();
-	int save(String racunPravnogLicaDTO, int id);
+	int save(String racunPravnogLicaDTO, int id) throws Exception;
 	boolean remove(int id);
 }
