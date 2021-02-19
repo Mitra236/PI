@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,21 @@ public class TransferController {
 			return  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<TransakcijaDTO>(HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/xml", consumes="text/xml")
+	private ResponseEntity<?> saveTransactionFromXml(@RequestBody TransakcijaDTO transakcijaDTO) {
+		if(transakcijaDTO == null) {
+			return new ResponseEntity<TransakcijaDTO>(HttpStatus.NO_CONTENT);
+		}
+		
+		try {
+			transakcijaServiceInterface.save(transakcijaDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
 	@GetMapping()
