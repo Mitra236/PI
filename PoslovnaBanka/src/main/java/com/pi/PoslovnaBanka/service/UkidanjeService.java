@@ -56,6 +56,14 @@ public class UkidanjeService implements UkidanjeServiceInterface {
 			throw new Exception("Racun na koji zelite da prebacite sredstva je nepostojeci, molimo vas pokusajte ponovo.");
 		}
 		
+		RacunPravnogLica racunPoverioca = racunPravnogLicaRepo.getAccountByUser(poverilac.getId());
+		if(!racunPoverioca.isVazeci()) {
+			throw new Exception("Racun na koji zelite da prebacite sredstva je nevazeci, molimo vas pokusajte ponovo.");
+		}
+		
+		if (racunPravnogLica.getBrojRacuna().equals(racunPravnogLicaDTO)) {
+			throw new Exception("Ne mozete prebaciti sredstva na svoj racun");
+		}
 		racunPravnogLica.setVazeci(false);
 		racunPravnogLicaRepo.save(racunPravnogLica);
 		
