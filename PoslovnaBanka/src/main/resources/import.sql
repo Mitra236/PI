@@ -5,6 +5,7 @@ INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefo
 INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Pera", "Peric", "7234567891734", "123456", "pera@gmail.com", "+38138856385", "Adresa", 0)
 INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Zika", "Zikic", "1234567891934", "223344", "zika@gmail.com", "+38138855385", "Adresa2", 1)
 INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Mika", "Mikic", "2233567891034", "654321", "mika@gmail.com", "+38138888385", "Adresa3", 0)
+INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Anica", "Mikic", "2233567891034", "654321", "anica@gmail.com", "+38138888385", "Adresa3", 0)
 
 INSERT INTO drzave(naziv_drzave) VALUES ("Srbija")
 INSERT INTO drzave(naziv_drzave) VALUES ("Germany")
@@ -23,6 +24,7 @@ INSERT INTO naseljena_mesta(sifra, naziv, ptt, drzava) VALUES ("900", "Rome", "6
 INSERT INTO racuni_pravnih_lica(broj_racuna, datum_otvaranja, vazeci, valuta, banka, ukidanje, klijent) VALUES ("1111 1111 1111 1111", "2018-06-23", 1, 1, 1, 1, 1)
 INSERT INTO racuni_pravnih_lica(broj_racuna, datum_otvaranja, vazeci, valuta, banka, ukidanje, klijent) VALUES ("2222 2222 2222 2222", "2019-08-24", 0, 2, 2, 1, 2)
 INSERT INTO racuni_pravnih_lica(broj_racuna, datum_otvaranja, vazeci, valuta, banka, ukidanje, klijent) VALUES ("0000 0000 0000 0000", "2019-08-24", 1, 2, 2, 1, 3)
+INSERT INTO racuni_pravnih_lica(broj_racuna, datum_otvaranja, vazeci, valuta, banka, ukidanje, klijent) VALUES ("1234 1234 1243 1234", "2019-08-24", 1, 2, 2, 1, 4)
 
 INSERT INTO vrste_placanja(oznaka_vrste, naziv_vrste) VALUES ("38483", "debitna kartica")
 INSERT INTO vrste_placanja(oznaka_vrste, naziv_vrste) VALUES ("48859", "kreditna kartica")
@@ -31,7 +33,12 @@ INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, pro
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-03-13", 57000, 89000, 18000, 100000, 2)
 INSERT INTO dnevno_stanje_racuna(datum_poslednjeg_prometa, prethodno_stanje, promet_u_korist, promet_na_teret, trenutno_stanje, racun_pravnog_lica) VALUES ("2020-09-13", 6000, 5000, 3000, 1000, 3)
 
-INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("maki", "svrha", "betmen", "2021-01-11", "2021-02-12", "1111 1111 1111 1111", 97, "392439248", "2222 2222 2222 2222", 97, "432948329843", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("maki", "svrha", "betmen", "2021-01-11", "2021-01-11", "1111 1111 1111 1111", 97, "392439248", "2222 2222 2222 2222", 97, "6788", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("marko", "svrha 2", "betmen", "2021-02-11", "2021-02-11", "1111 1111 1111 1111", 97, "392439248", "0000 0000 0000 0000", 97, "68767", 0, 1300, 0, 0, 1, 1, 1, 1, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("petar", "svrha ff", "nesto", "2021-02-02", "2021-02-02", "2222 2222 2222 2222", 97, "392439248", "1111 1111 1111 1111", 97, "2332", 0, 1300, 0, 0, 1, 1, 1, 2, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("pera", "svrha 5", "sta", "2021-01-29", "2021-01-29", "2222 2222 2222 2222", 97, "392439248", "1111 1111 1111 1111", 97, "250", 0, 1300, 0, 0, 1, 1, 1, 2, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("pera", "svrha 5", "sta", "2021-01-29", "2021-01-29", "0000 0000 0000 0000", 97, "392439248", "1111 1111 1111 1111", 97, "100", 0, 1300, 0, 0, 1, 1, 1, 3, 1)
+INSERT INTO transakcije(duznik, svrha_placanja, poverilac, datum_prijema, datum_valute, racun_duznika, model_zaduzenja, poziv_na_broj_zaduzenja, racun_poverioca, model_odobrenja, poziv_na_broj_odobrenja, hitno, iznos, tip_greske, status, smer, naseljeno_mesto, valuta, dnevno_stanje_racuna, vrsta_placanja) VALUES ("pera", "svrha 5", "sta", "2021-01-29", "2021-01-29", "0000 0000 0000 0000", 97, "392439248", "1111 1111 1111 1111", 97, "2000", 0, 1300, 0, 0, 1, 1, 1, 3, 1)
 
 INSERT INTO kursne_liste(datum, broj_kursne_liste, datum_primene, banka) VALUES ("2020-03-13", 234, "2020-03-15", 1)
 INSERT INTO kursne_liste(datum, broj_kursne_liste, datum_primene, banka) VALUES ("2020-03-10", 999, "2020-03-13", 2)

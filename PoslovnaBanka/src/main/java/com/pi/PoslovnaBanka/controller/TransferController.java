@@ -57,7 +57,7 @@ public class TransferController {
 			e.printStackTrace();
 			return  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>("Transakcija je uspesno sacuvana!", HttpStatus.OK);
 	}
 	
 	@GetMapping()
