@@ -67,7 +67,6 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	@Override
 	public int save(TransakcijaDTO transakcijaDTO) throws Exception {
 		Transakcija transakcija = new Transakcija();
-		System.out.println(transakcijaDTO.getDuznik());
 		Klijent duznik = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunDuznika());
 		Klijent poverilac = klijentRepo.getUserByAccountNumber(transakcijaDTO.getRacunPoverioca());
 		

@@ -27,7 +27,7 @@ public class Banka implements Serializable {
 	@Column(name = "banka_id", unique = true, nullable = false)
 	private int id;	
 	
-	@Column(name = "sifra_banke", unique = true, nullable = false)
+	@Column(name = "sifra_banke", unique = true, nullable = false, length = 3)
 	private String sifraBanke;
 	
 	@Column(name = "naziv_banke", unique = true, nullable = false)

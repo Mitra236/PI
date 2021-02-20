@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,5 +75,14 @@ public class RacunController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(racunPravnogLica, HttpStatus.OK);
+	}
+	
+	@PostMapping(consumes = "application/json")
+	private ResponseEntity<?> createAccount(@RequestBody RacunPravnogLicaDTO racunPravnogLicaDTO) {
+		if (racunPravnogLicaDTO == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		racunPravnogLicaServiceInterface.save(racunPravnogLicaDTO);
+		
+		return new ResponseEntity<>(racunPravnogLicaDTO.getId(), HttpStatus.OK);
 	}
 }

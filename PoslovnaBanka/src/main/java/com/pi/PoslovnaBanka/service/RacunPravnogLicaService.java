@@ -1,15 +1,17 @@
 package com.pi.PoslovnaBanka.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pi.PoslovnaBanka.dto.DnevnoStanjeDTO;
 import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 import com.pi.PoslovnaBanka.entity.Banka;
+import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 import com.pi.PoslovnaBanka.entity.Klijent;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Valuta;
@@ -57,9 +59,6 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	public int save(RacunPravnogLicaDTO racunPravnogLica) {
 		RacunPravnogLica racun = new RacunPravnogLica();
 		Klijent klijent = new Klijent();
-		//TO-DO
-		//add daily account state
-		//DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna(); 
 		
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
 		Banka banka = bankaRepo.findById(racunPravnogLica.getBanka().getId()).orElse(null);
@@ -77,9 +76,30 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
 		racun.setBrojRacuna(racunPravnogLica.getBrojRacuna());
-		racun.setDatumOtvaranja((java.sql.Date) new Date());
+		racun.setDatumOtvaranja(java.sql.Date.valueOf(LocalDate.now()));
+		
+		racunPravnogLicaRepo.save(racun);
+		
+		for (DnevnoStanjeDTO dnevnoStanjeDTO : racunPravnogLica.getDnevnoStanjeRacuna()) {
+			DnevnoStanjeRacuna newDailyState = CreateDailyAccountState(dnevnoStanjeDTO);
+			newDailyState.setRacunPravnogLica(racun);
+			dnevnoStanjeRepo.save(newDailyState);
+		}
 
-		return racunPravnogLicaRepo.save(racun).getId();
+		return racun.getId();
+	}
+	
+	private DnevnoStanjeRacuna CreateDailyAccountState(DnevnoStanjeDTO dnevnoStanje)
+	{
+		DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna();
+		
+		dnevnoStanjeRacuna.setDatumPoslednjegPrometa(java.sql.Date.valueOf(LocalDate.now()));
+		dnevnoStanjeRacuna.setPrethodnoStanje(0);
+		dnevnoStanjeRacuna.setTrenutnoStanje(dnevnoStanje.getTrenutnoStanje());
+		dnevnoStanjeRacuna.setPrometNaTeret(0);
+		dnevnoStanjeRacuna.setPrometUKorist(0);
+		
+		return dnevnoStanjeRacuna;
 	}
 
 	@Override

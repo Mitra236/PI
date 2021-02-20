@@ -35,7 +35,7 @@ public class Klijent implements Serializable {
 	@Column(name = "jmbg", unique = true, nullable = false, length = 13)
 	private String JMBG;
 	
-	@Column(name = "lozinka", unique = true, nullable = false)
+	@Column(name = "lozinka", unique = true, nullable = true)
 	private String lozinka;
 	
 	@Email
