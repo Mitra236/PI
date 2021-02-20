@@ -1,8 +1,10 @@
 package com.pi.PoslovnaBanka.service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,13 +77,14 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
-		racun.setBrojRacuna(racunPravnogLica.getBrojRacuna());
+		String accountNumber = generateAccountNumber();
+		racun.setBrojRacuna(banka.getSifraBanke().concat("-" + accountNumber + "-" + generateControlNumber(banka.getSifraBanke(), accountNumber)));
 		racun.setDatumOtvaranja(java.sql.Date.valueOf(LocalDate.now()));
 		
 		racunPravnogLicaRepo.save(racun);
 		
 		for (DnevnoStanjeDTO dnevnoStanjeDTO : racunPravnogLica.getDnevnoStanjeRacuna()) {
-			DnevnoStanjeRacuna newDailyState = CreateDailyAccountState(dnevnoStanjeDTO);
+			DnevnoStanjeRacuna newDailyState = createDailyAccountState(dnevnoStanjeDTO);
 			newDailyState.setRacunPravnogLica(racun);
 			dnevnoStanjeRepo.save(newDailyState);
 		}
@@ -89,8 +92,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		return racun.getId();
 	}
 	
-	private DnevnoStanjeRacuna CreateDailyAccountState(DnevnoStanjeDTO dnevnoStanje)
-	{
+	private static DnevnoStanjeRacuna createDailyAccountState(DnevnoStanjeDTO dnevnoStanje)	{
 		DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna();
 		
 		dnevnoStanjeRacuna.setDatumPoslednjegPrometa(java.sql.Date.valueOf(LocalDate.now()));
@@ -100,6 +102,32 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		dnevnoStanjeRacuna.setPrometUKorist(0);
 		
 		return dnevnoStanjeRacuna;
+	}
+	
+	private static String generateAccountNumber() {
+		Random random = new Random();
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(random.nextInt(10) + 1);
+		
+		for (int i = 0; i < 12; i++) {
+	        sb.append(random.nextInt(11));
+	    }
+
+	    return sb.toString();
+	}
+	
+	private static String generateControlNumber(String bankNum, String accountNumber) {
+		double randomNum;		
+		try {
+			randomNum = Double.parseDouble(bankNum.concat(accountNumber));
+		} catch(NumberFormatException e) {
+			randomNum = 0;
+		}
+		double reminder =  randomNum % 97;
+		
+		DecimalFormat format = new DecimalFormat("0.#");
+		return String.valueOf(format.format(reminder));
 	}
 
 	@Override
