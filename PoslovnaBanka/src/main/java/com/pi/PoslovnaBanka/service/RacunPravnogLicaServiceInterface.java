@@ -1,13 +1,13 @@
 package com.pi.PoslovnaBanka.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.pi.PoslovnaBanka.dto.RacunPravnogLicaDTO;
 
 public interface RacunPravnogLicaServiceInterface {
 
 	RacunPravnogLicaDTO findOne(int id);
-	List<RacunPravnogLicaDTO> findAll();
+	Page<RacunPravnogLicaDTO> findAll(int page, int size);
 	int save(RacunPravnogLicaDTO racunPravnogLica) throws Exception;
 	boolean remove(int id);
 	RacunPravnogLicaDTO getAccountByUser(int client);

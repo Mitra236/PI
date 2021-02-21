@@ -2,11 +2,13 @@ package com.pi.PoslovnaBanka.service;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,12 +50,17 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	}
 
 	@Override
-	public List<RacunPravnogLicaDTO> findAll() {
-		List<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
-		for(RacunPravnogLica r: racunPravnogLicaRepo.findAll()) {
-			racunPravnogLica.add(new RacunPravnogLicaDTO(r));
-		}
-		return racunPravnogLica;
+	public Page<RacunPravnogLicaDTO> findAll(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<RacunPravnogLica> entities = racunPravnogLicaRepo.findAll(pageable);
+		Page<RacunPravnogLicaDTO> dtoPage = entities.map(new Function<RacunPravnogLica, RacunPravnogLicaDTO>() {
+			@Override
+			public RacunPravnogLicaDTO apply(RacunPravnogLica racun) {
+				RacunPravnogLicaDTO racunDto = new RacunPravnogLicaDTO(racun);
+				return racunDto;
+			}
+		});
+		return dtoPage;
 	}
 
 	@Override
@@ -135,7 +142,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	}
 	
 	private boolean isAccountNumberUnique(String accountNumber) {
-		return findAll()
+		return findAll(0, Integer.MAX_VALUE)
 					.stream()
 					.noneMatch(account -> account.getBrojRacuna().equals(accountNumber));
 	}

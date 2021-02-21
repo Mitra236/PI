@@ -1,8 +1,7 @@
 package com.pi.PoslovnaBanka.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,12 +29,12 @@ public class RacunController {
 	DnevnoStanjeRacunaServiceInterface dnevnoStanjeRacunaInterface;
 	
 	@GetMapping
-	private ResponseEntity<List<RacunPravnogLicaDTO>> getAccounts() {
-		List<RacunPravnogLicaDTO> racunPravnogLicaDTOs = racunPravnogLicaServiceInterface.findAll();
+	private ResponseEntity<Page<RacunPravnogLicaDTO>> getAccounts(@RequestParam("page") int page, @RequestParam("size") int size) {
+		Page<RacunPravnogLicaDTO> racunPravnogLicaDTOs = racunPravnogLicaServiceInterface.findAll(page, size);
 		if(racunPravnogLicaDTOs == null) {
-			return new ResponseEntity<List<RacunPravnogLicaDTO>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Page<RacunPravnogLicaDTO>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<>(racunPravnogLicaServiceInterface.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(racunPravnogLicaServiceInterface.findAll(page, size), HttpStatus.OK);
 		
 	}
 	
