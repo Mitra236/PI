@@ -2,14 +2,19 @@ package com.pi.PoslovnaBanka.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -87,6 +92,47 @@ public class Transakcija implements Serializable {
     @JoinColumn(name = "vrsta_placanja", referencedColumnName = "vrsta_placanja_id", nullable=true)
 	private VrstaPlacanja vrstaPlacanja;
 	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "transakcija")
+	private Set<PorukeUPaketu> porukaPaket = new HashSet<PorukeUPaketu>();
+	
+	public Transakcija(int brojStavke, String duznik, String svrhaPlacanja, String poverilac, Date datumPrijema,
+			Date datumValute, String racunDuznika, int modelZaduzenja, String pozivNaBrojZaduzenja,
+			String racunPoverioca, int modelOdobrenja, String pozivNaBrojOdobrenja, boolean hitno, double iznos,
+			TipGreske tipGreske, Status status, SmerTransakcije smer, NaseljenoMesto naseljenoMesto, Valuta valuta,
+			DnevnoStanjeRacuna dnevnoStanjeRacuna, VrstaPlacanja vrstaPlacanja, Set<PorukeUPaketu> porukaPaket) {
+		super();
+		this.brojStavke = brojStavke;
+		this.duznik = duznik;
+		this.svrhaPlacanja = svrhaPlacanja;
+		this.poverilac = poverilac;
+		this.datumPrijema = datumPrijema;
+		this.datumValute = datumValute;
+		this.racunDuznika = racunDuznika;
+		this.modelZaduzenja = modelZaduzenja;
+		this.pozivNaBrojZaduzenja = pozivNaBrojZaduzenja;
+		this.racunPoverioca = racunPoverioca;
+		this.modelOdobrenja = modelOdobrenja;
+		this.pozivNaBrojOdobrenja = pozivNaBrojOdobrenja;
+		this.hitno = hitno;
+		this.iznos = iznos;
+		this.tipGreske = tipGreske;
+		this.status = status;
+		this.smer = smer;
+		this.naseljenoMesto = naseljenoMesto;
+		this.valuta = valuta;
+		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
+		this.vrstaPlacanja = vrstaPlacanja;
+		this.porukaPaket = porukaPaket;
+	}
+
+	public Set<PorukeUPaketu> getPorukaPaket() {
+		return porukaPaket;
+	}
+
+	public void setPorukaPaket(Set<PorukeUPaketu> porukaPaket) {
+		this.porukaPaket = porukaPaket;
+	}
+
 	public Transakcija() {
 		super();
 	}

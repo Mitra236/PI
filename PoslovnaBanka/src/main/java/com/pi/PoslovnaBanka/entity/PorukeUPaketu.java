@@ -25,15 +25,20 @@ public class PorukeUPaketu implements Serializable{
 	@ManyToOne
     @JoinColumn(name = "poruka", referencedColumnName = "poruka_id", nullable=false)
 	private Poruka poruka;
+	
+	@ManyToOne
+    @JoinColumn(name = "transakcija", referencedColumnName = "transakcija_id", nullable=false)
+	private Transakcija transakcija;
 
 	public PorukeUPaketu() {
 		super();
 	}
 
-	public PorukeUPaketu(int id, Poruka poruka) {
+	public PorukeUPaketu(int id, Poruka poruka, Transakcija transakcija) {
 		super();
 		this.id = id;
 		this.poruka = poruka;
+		this.transakcija = transakcija;
 	}
 
 	public Poruka getPoruka() {
@@ -46,5 +51,13 @@ public class PorukeUPaketu implements Serializable{
 
 	public int getId() {
 		return id;
+	}
+
+	public Transakcija getTransakcija() {
+		return transakcija;
+	}
+
+	public void setTransakcija(Transakcija transakcija) {
+		this.transakcija = transakcija;
 	}
 }

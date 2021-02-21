@@ -51,8 +51,8 @@ INSERT INTO kursuvaluti(kupovni, srednji, prodajni, kursna_lista, valuta) VALUES
 INSERT INTO poruke(ukupan_iznos, tip, racun_poverioca, racun_nalogodavca) VALUES (55000, 1, 1, 2)
 INSERT INTO poruke(ukupan_iznos, tip, racun_poverioca, racun_nalogodavca) VALUES (89000, 2, 1, 1)
 
-INSERT INTO poruka_u_paketu(poruka) VALUES (1)
-INSERT INTO poruka_u_paketu(poruka) VALUES (2)
+INSERT INTO poruka_u_paketu(poruka, transakcija) VALUES (1, 1)
+INSERT INTO poruka_u_paketu(poruka, transakcija) VALUES (2, 2)
 
 --
 ----	<dependency>

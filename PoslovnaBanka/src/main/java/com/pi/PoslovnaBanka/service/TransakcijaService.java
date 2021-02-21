@@ -14,6 +14,7 @@ import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.entity.DnevnoStanjeRacuna;
 import com.pi.PoslovnaBanka.entity.Klijent;
 import com.pi.PoslovnaBanka.entity.Poruka;
+import com.pi.PoslovnaBanka.entity.PorukeUPaketu;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Transakcija;
 import com.pi.PoslovnaBanka.entity.VrstaPoruke;
@@ -21,6 +22,7 @@ import com.pi.PoslovnaBanka.repository.BankaRepository;
 import com.pi.PoslovnaBanka.repository.DnevnoStanjeRacunaRepository;
 import com.pi.PoslovnaBanka.repository.KlijentRepository;
 import com.pi.PoslovnaBanka.repository.MedjubankarskiTransferRepository;
+import com.pi.PoslovnaBanka.repository.PorukaUPaketuRepository;
 import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 import com.pi.PoslovnaBanka.repository.TransakcijaRepository;
 import com.pi.PoslovnaBanka.repository.ValutaRepository;
@@ -53,6 +55,9 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	
 	@Autowired
 	MedjubankarskiTransferRepository porukaRepo;
+	
+	@Autowired
+	PorukaUPaketuRepository porukaUPaketuRepo;
 	
 	@Override
 	public TransakcijaDTO findOne(int id) {
@@ -145,6 +150,13 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			porukaRepo.save(poruka);
 			
 			//poruka u paketu
+			
+			PorukeUPaketu porukeUPaketu = new PorukeUPaketu();
+			porukeUPaketu.setPoruka(poruka);
+			porukeUPaketu.setTransakcija(transakcija);
+			
+			porukaUPaketuRepo.save(porukeUPaketu);
+			
 			Banka bankaNalogodavac = bankaRepo.findById(racunDuznika.getBanka().getId()).orElse(null);
 			bankaNalogodavac.setStanje(bankaNalogodavac.getStanje() - amount);
 			bankaRepo.save(bankaNalogodavac);
