@@ -2,6 +2,7 @@ package com.pi.PoslovnaBanka.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -173,6 +174,16 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 	public boolean remove(int id) {
 		transakcijaRepo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public List<TransakcijaDTO> getTransactionByAccountNumberAndTimeRange(String accountNumber, Date fromDate,
+			Date toDate) {
+		List<TransakcijaDTO> transakcijaDTOs = new ArrayList<TransakcijaDTO>();
+		for(Transakcija t: transakcijaRepo.getTransactionByAccountNumberAndTimeRange(accountNumber, fromDate, toDate)) {
+			transakcijaDTOs.add(new TransakcijaDTO(t));
+		}
+		return transakcijaDTOs;
 	}
 
 }

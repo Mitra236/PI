@@ -1,5 +1,6 @@
 package com.pi.PoslovnaBanka.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +83,14 @@ public class TransferController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(transakcija, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/by-date")
+	private ResponseEntity<List<TransakcijaDTO>> getClientxml(@RequestParam("brojRacuna") String brojRacuna, @RequestParam("od_datuma") Date odDatuma, @RequestParam("do_datuma") Date doDatuma) {
+		List<TransakcijaDTO> transakcijaDTOs = transakcijaServiceInterface.getTransactionByAccountNumberAndTimeRange(brojRacuna, odDatuma, doDatuma);
+		if (transakcijaDTOs == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(transakcijaDTOs, HttpStatus.OK);
 	}
 }
