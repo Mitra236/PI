@@ -12,5 +12,5 @@ public interface RacunPravnogLicaServiceInterface {
 	boolean remove(int id);
 	RacunPravnogLicaDTO getAccountByUser(int client);
 	RacunPravnogLicaDTO getAccountByUserAndAccountNumber(int id, String number);
-	String generateAccountNumber(String sifraBanke);
+	String generateAccountNumber(String sifraBanke) throws Exception;
 }

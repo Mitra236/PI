@@ -86,7 +86,7 @@ public class RacunController {
 	}
 	
 	@GetMapping(value = "generate-number")
-	private ResponseEntity<String> generateAccountNumber(@RequestParam("bankNumber") String sifraBanke) {
+	private ResponseEntity<String> generateAccountNumber(@RequestParam("bankNumber") String sifraBanke) throws Exception {
 		if (sifraBanke.isEmpty()) return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 		
 		String number = racunPravnogLicaServiceInterface.generateAccountNumber(sifraBanke);
