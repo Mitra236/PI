@@ -86,8 +86,17 @@ public class TransferController {
 	}
 	
 	@GetMapping(value="/by-date")
-	private ResponseEntity<List<TransakcijaDTO>> getClientxml(@RequestParam("brojRacuna") String brojRacuna, @RequestParam("od_datuma") Date odDatuma, @RequestParam("do_datuma") Date doDatuma) {
+	private ResponseEntity<List<TransakcijaDTO>> getTransactionByAccountNumberAndDate(@RequestParam("brojRacuna") String brojRacuna, @RequestParam("od_datuma") Date odDatuma, @RequestParam("do_datuma") Date doDatuma) {
 		List<TransakcijaDTO> transakcijaDTOs = transakcijaServiceInterface.getTransactionByAccountNumberAndTimeRange(brojRacuna, odDatuma, doDatuma);
+		if (transakcijaDTOs == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(transakcijaDTOs, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/by-account-number")
+	private ResponseEntity<List<TransakcijaDTO>> getTransactionByAccountNumber(@RequestParam("brojRacuna") String brojRacuna) {
+		List<TransakcijaDTO> transakcijaDTOs = transakcijaServiceInterface.getTransactionByAccountNumber(brojRacuna);
 		if (transakcijaDTOs == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

@@ -13,4 +13,5 @@ public interface TransakcijaServiceInterface {
 	int save(TransakcijaDTO transakcija) throws Exception ;
 	boolean remove(int id);
 	List<TransakcijaDTO> getTransactionByAccountNumberAndTimeRange(String accountNumber, Date fromDate, Date toDate);
+	List<TransakcijaDTO> getTransactionByAccountNumber(String accountNumber);
 }

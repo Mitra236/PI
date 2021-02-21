@@ -185,5 +185,14 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 		}
 		return transakcijaDTOs;
 	}
+	
+	@Override
+	public List<TransakcijaDTO> getTransactionByAccountNumber(String accountNumber) {
+		List<TransakcijaDTO> transakcijaDTOs = new ArrayList<TransakcijaDTO>();
+		for(Transakcija t: transakcijaRepo.getTransactionByAccountNumber(accountNumber)) {
+			transakcijaDTOs.add(new TransakcijaDTO(t));
+		}
+		return transakcijaDTOs;
+	}
 
 }
