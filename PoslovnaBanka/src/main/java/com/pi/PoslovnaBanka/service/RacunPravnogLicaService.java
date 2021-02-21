@@ -58,7 +58,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 
 	@Override
 	@Transactional
-	public int save(RacunPravnogLicaDTO racunPravnogLica) {
+	public int save(RacunPravnogLicaDTO racunPravnogLica) throws Exception {
 		RacunPravnogLica racun = new RacunPravnogLica();
 		Klijent klijent = new Klijent();
 		
@@ -71,16 +71,20 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		klijent.setJMBG(racunPravnogLica.getKlijent().getJMBG());
 		klijent.setEmail(racunPravnogLica.getKlijent().getEmail());
 		klijent.setUloga(racunPravnogLica.getKlijent().getUloga());
-		klijentRepo.save(klijent);
-		
-		
+				
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
-		String accountNumber = generateAccountNumber();
-		racun.setBrojRacuna(banka.getSifraBanke().concat("-" + accountNumber + "-" + generateControlNumber(banka.getSifraBanke(), accountNumber)));
+		String personalAccountNumber = generateAccountNumber();
+		String accountNumber = banka.getSifraBanke().concat("-" + personalAccountNumber + "-" + generateControlNumber(banka.getSifraBanke(), personalAccountNumber));
+		if (isAccountNumberUnique(accountNumber)) {
+			racun.setBrojRacuna(accountNumber);
+		} else {
+			throw new Exception("Generisani broj racuna se poklapa sa postojecim, pokusajte kreirati nalog ponovo");
+		}
 		racun.setDatumOtvaranja(java.sql.Date.valueOf(LocalDate.now()));
 		
+		klijentRepo.save(klijent);
 		racunPravnogLicaRepo.save(racun);
 		
 		for (DnevnoStanjeDTO dnevnoStanjeDTO : racunPravnogLica.getDnevnoStanjeRacuna()) {
@@ -128,6 +132,12 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		
 		DecimalFormat format = new DecimalFormat("0.#");
 		return String.valueOf(format.format(reminder));
+	}
+	
+	private boolean isAccountNumberUnique(String accountNumber) {
+		return findAll()
+					.stream()
+					.noneMatch(account -> account.getBrojRacuna().equals(accountNumber));
 	}
 
 	@Override

@@ -78,7 +78,7 @@ public class RacunController {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	private ResponseEntity<?> createAccount(@RequestBody RacunPravnogLicaDTO racunPravnogLicaDTO) {
+	private ResponseEntity<?> createAccount(@RequestBody RacunPravnogLicaDTO racunPravnogLicaDTO) throws Exception{
 		if (racunPravnogLicaDTO == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 		racunPravnogLicaServiceInterface.save(racunPravnogLicaDTO);
