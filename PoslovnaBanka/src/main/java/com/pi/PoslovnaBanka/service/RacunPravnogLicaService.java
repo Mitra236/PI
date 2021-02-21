@@ -75,10 +75,8 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
-		String personalAccountNumber = generateAccountNumber();
-		String accountNumber = banka.getSifraBanke().concat("-" + personalAccountNumber + "-" + generateControlNumber(banka.getSifraBanke(), personalAccountNumber));
-		if (isAccountNumberUnique(accountNumber)) {
-			racun.setBrojRacuna(accountNumber);
+		if (isAccountNumberUnique(racun.getBrojRacuna())) {
+			racun.setBrojRacuna(racun.getBrojRacuna());
 		} else {
 			throw new Exception("Generisani broj racuna se poklapa sa postojecim, pokusajte kreirati nalog ponovo");
 		}
@@ -108,7 +106,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		return dnevnoStanjeRacuna;
 	}
 	
-	private static String generateAccountNumber() {
+	public String generateAccountNumber(String sifraBanke) {
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
 		
@@ -118,7 +116,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 	        sb.append(random.nextInt(11));
 	    }
 
-	    return sb.toString();
+	    return sifraBanke.concat("-" + sb.toString() + "-" + generateControlNumber(sifraBanke, sb.toString()));
 	}
 	
 	private static String generateControlNumber(String bankNum, String accountNumber) {

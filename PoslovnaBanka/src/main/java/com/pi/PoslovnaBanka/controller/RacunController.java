@@ -84,4 +84,12 @@ public class RacunController {
 		
 		return new ResponseEntity<>(racunPravnogLicaDTO.getId(), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "generate-number")
+	private ResponseEntity<String> generateAccountNumber(@RequestParam("bankNumber") String sifraBanke) {
+		if (sifraBanke.isEmpty()) return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		
+		String number = racunPravnogLicaServiceInterface.generateAccountNumber(sifraBanke);
+		return new ResponseEntity<String>(number, HttpStatus.OK);
+	}
 }
