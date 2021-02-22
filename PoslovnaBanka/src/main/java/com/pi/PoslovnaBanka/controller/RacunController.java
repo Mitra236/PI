@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,5 +92,15 @@ public class RacunController {
 		
 		String number = racunPravnogLicaServiceInterface.generateAccountNumber(sifraBanke);
 		return new ResponseEntity<String>(number, HttpStatus.OK);
+	}
+	
+	@DeleteMapping()
+	private ResponseEntity<Boolean> deleteFromCourse(@RequestParam("id") int id) {
+		
+		Boolean removeAccount = racunPravnogLicaServiceInterface.remove(id);
+
+		if (removeAccount == false) return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND); 
+		
+		return new ResponseEntity<Boolean>(removeAccount, HttpStatus.OK);
 	}
 }

@@ -141,6 +141,10 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 
 	@Override
 	public boolean remove(int id) {
+		RacunPravnogLica racunPravnogLica = racunPravnogLicaRepo.findById(id).orElse(null);
+		for (DnevnoStanjeRacuna ds: racunPravnogLica.getDnevnoStanjeRacuna()) {
+			dnevnoStanjeRepo.delete(ds);
+		}
 		racunPravnogLicaRepo.deleteById(id);
 		return true;
 	}
