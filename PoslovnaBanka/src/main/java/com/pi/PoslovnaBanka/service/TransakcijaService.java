@@ -142,7 +142,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			poruka.setRacunNalogodavca(racunDuznika.getBanka());
 			poruka.setRacunPoverioca(racunPoverioca.getBanka());
 			
-			if(amount < 118000) {
+			if(amount < 200000) {
 				poruka.setTip(VrstaPoruke.MT102);
 			} else {
 				poruka.setTip(VrstaPoruke.MT103);

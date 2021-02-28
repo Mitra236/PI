@@ -1,10 +1,13 @@
 package com.pi.PoslovnaBanka.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pi.PoslovnaBanka.dto.PorukaDTO;
+import com.pi.PoslovnaBanka.dto.PorukaTransferDTO;
 import com.pi.PoslovnaBanka.entity.Poruka;
 import com.pi.PoslovnaBanka.repository.MedjubankarskiTransferRepository;
 
@@ -15,13 +18,21 @@ public class MedjubankarskiTransferService implements MedjubankarskiTransferServ
 	MedjubankarskiTransferRepository medjubankarskiTransferRepo;
 
 	@Override
-	public Poruka findOne(int id) {
-		return medjubankarskiTransferRepo.findById(id).orElse(null);
+	public List<PorukaTransferDTO> findByTransaction(int id) {
+		List<PorukaTransferDTO> messagesToDTO = new ArrayList<PorukaTransferDTO>();
+		for (Poruka poruka: medjubankarskiTransferRepo.findByTransaction(id)) {
+			messagesToDTO.add(new PorukaTransferDTO(poruka));
+		}
+		return messagesToDTO;
 	}
 
 	@Override
-	public List<Poruka> findAll() {
-		return medjubankarskiTransferRepo.findAll();
+	public List<PorukaDTO> findAll() {
+		List<PorukaDTO> messagesToDTO = new ArrayList<PorukaDTO>();
+		for (Poruka poruka: medjubankarskiTransferRepo.findAll()) {
+			messagesToDTO.add(new PorukaDTO(poruka));
+		}
+		return messagesToDTO;
 	}
 
 	@Override
