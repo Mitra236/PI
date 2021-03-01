@@ -19,6 +19,7 @@ public class KlijentDTO implements Serializable {
 	private String telefon;
 	private String adresa;
 	private Uloga uloga;
+	private boolean vazeci;
 	private ArrayList<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
 	
 	public KlijentDTO(int id, String ime, String prezime, String jMBG, String email, String telefon, String adresa, Uloga uloga,
@@ -35,9 +36,32 @@ public class KlijentDTO implements Serializable {
 		this.racunPravnogLica = racunPravnogLica;
 	}
 	
+	
+	
+	public KlijentDTO(int id, String ime, String prezime, String jMBG, String email, String telefon, String adresa,
+			Uloga uloga, boolean vazeci, ArrayList<RacunPravnogLicaDTO> racunPravnogLica) {
+		super();
+		this.id = id;
+		this.ime = ime;
+		this.prezime = prezime;
+		JMBG = jMBG;
+		this.email = email;
+		this.telefon = telefon;
+		this.adresa = adresa;
+		this.uloga = uloga;
+		this.vazeci = vazeci;
+		this.racunPravnogLica = racunPravnogLica;
+	}
+
+
+
+	public KlijentDTO() {
+		super();
+	}
+	
 	public KlijentDTO(Klijent klijent) {
 		this(klijent.getId(), klijent.getIme(), klijent.getPrezime(), klijent.getJMBG(), klijent.getEmail(), klijent.getTelefon(),
-				klijent.getAdresa(), klijent.getUloga(), new ArrayList<RacunPravnogLicaDTO>());
+				klijent.getAdresa(), klijent.getUloga(), klijent.isVazeci() ,new ArrayList<RacunPravnogLicaDTO>());
 		
 		ArrayList<RacunPravnogLicaDTO> racuni = new ArrayList<RacunPravnogLicaDTO>();
 		
@@ -47,6 +71,20 @@ public class KlijentDTO implements Serializable {
 		
 		this.setRacunPravnogLica(racuni);
 	}
+	
+	
+
+	public boolean isVazeci() {
+		return vazeci;
+	}
+
+
+
+	public void setVazeci(boolean vazeci) {
+		this.vazeci = vazeci;
+	}
+
+
 
 	public int getId() {
 		return id;

@@ -1,11 +1,11 @@
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("340", "ERSTE BANK", "101626723", "Bulevar Oslobodjenja 7 21102 Novi Sad", "erstebank@email.rs", "www.erstebank.rs", "+381 (0)21 489 06 65", "0800 201 201", "GIBARS22", 500000)
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("160", "BANCA INTESA", "100001159", "Bulevar Mihajla Pupina 4a 21102 Novi Sad", "bancaintesa@email.rs", "www.bancaintesa.rs", "+381 11 310 88 55 ", "+ 381 11 3108888", "DBDBRSBG", 800000)
-INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje) VALUES ("170", "UNICREDIT BANK SRBIJA", "27324919", "Narodnog Fronta 21 21102 Novi Sad", "unicredit@email.rs", "www.unicreditbank.rs", "+021/ 48 03 105", "(381)11-320-4500", "BACXRSBG", 10000000)
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje, vazeci) VALUES ("340", "ERSTE BANK", "101626723", "Bulevar Oslobodjenja 7 21102 Novi Sad", "erstebank@email.rs", "www.erstebank.rs", "+381 (0)21 489 06 65", "0800 201 201", "GIBARS22", 500000, 1)
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje, vazeci) VALUES ("160", "BANCA INTESA", "100001159", "Bulevar Mihajla Pupina 4a 21102 Novi Sad", "bancaintesa@email.rs", "www.bancaintesa.rs", "+381 11 310 88 55 ", "+ 381 11 3108888", "DBDBRSBG", 800000, 1)
+INSERT INTO banke(sifra_banke, naziv_banke, pib, adresa, email, web, fax, telefon, swift, stanje, vazeci) VALUES ("170", "UNICREDIT BANK SRBIJA", "27324919", "Narodnog Fronta 21 21102 Novi Sad", "unicredit@email.rs", "www.unicreditbank.rs", "+021/ 48 03 105", "(381)11-320-4500", "BACXRSBG", 10000000, 1)
 
-INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Pera", "Peric", "7234567891734", "123456", "pera@gmail.com", "+38138856385", "Adresa", 0)
-INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Zika", "Zikic", "1234567891934", "223344", "zika@gmail.com", "+38138855385", "Adresa2", 1)
-INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Mika", "Mikic", "2233567891034", "654321", "mika@gmail.com", "+38138888385", "Adresa3", 0)
-INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga) VALUES ("Anica", "Mikic", "2233567891034", "654321", "anica@gmail.com", "+38138888385", "Adresa3", 0)
+INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga, vazeci) VALUES ("Pera", "Peric", "7234567891734", "123456", "pera@gmail.com", "+38138856385", "Adresa", 0, 1)
+INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga, vazeci) VALUES ("Zika", "Zikic", "1234567891934", "223344", "zika@gmail.com", "+38138855385", "Adresa2", 1, 1)
+INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga, vazeci) VALUES ("Mika", "Mikic", "2233567891034", "654321", "mika@gmail.com", "+38138888385", "Adresa3", 0, 1)
+INSERT INTO klijenti(ime, prezime, JMBG, lozinka, email, telefon, adresa, uloga, vazeci) VALUES ("Anica", "Mikic", "2233567891034", "654321", "anica@gmail.com", "+38138888385", "Adresa3", 0, 1)
 
 INSERT INTO drzave(naziv_drzave) VALUES ("Srbija")
 INSERT INTO drzave(naziv_drzave) VALUES ("Germany")

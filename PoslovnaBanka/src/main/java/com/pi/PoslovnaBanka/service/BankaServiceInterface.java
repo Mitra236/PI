@@ -8,7 +8,7 @@ public interface BankaServiceInterface {
 
 	Banka findOne(int id);
 	List<Banka> findAll();
-	int save(Banka banka);
-	boolean remove(int id);
+	Banka save(Banka banka);
+	void remove(Banka banka);
 	Banka getBankByName(String naziv);
 }

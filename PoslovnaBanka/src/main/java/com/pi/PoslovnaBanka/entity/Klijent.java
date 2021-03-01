@@ -51,6 +51,9 @@ public class Klijent implements Serializable {
 	@Column(name = "uloga", unique = false, nullable = true)
 	private Uloga uloga;
 	
+	@Column(name = "vazeci", unique = false, nullable = true)
+	private boolean vazeci;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "klijent")
 	private Set<RacunPravnogLica> racunPravnogLica = new HashSet<RacunPravnogLica>();
 	
@@ -71,6 +74,34 @@ public class Klijent implements Serializable {
 		this.adresa = adresa;
 		this.uloga = uloga;
 		this.racunPravnogLica = racunPravnogLica;
+	}
+	
+	
+
+	public Klijent(int id, String ime, String prezime, String jMBG, String lozinka, @Email String email, String telefon,
+			String adresa, Uloga uloga, boolean vazeci, Set<RacunPravnogLica> racunPravnogLica) {
+		super();
+		this.id = id;
+		this.ime = ime;
+		this.prezime = prezime;
+		JMBG = jMBG;
+		this.lozinka = lozinka;
+		this.email = email;
+		this.telefon = telefon;
+		this.adresa = adresa;
+		this.uloga = uloga;
+		this.vazeci = vazeci;
+		this.racunPravnogLica = racunPravnogLica;
+	}
+	
+	
+
+	public boolean isVazeci() {
+		return vazeci;
+	}
+
+	public void setVazeci(boolean vazeci) {
+		this.vazeci = vazeci;
 	}
 
 	public int getId() {

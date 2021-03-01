@@ -58,6 +58,9 @@ public class Banka implements Serializable {
 	@Column(name = "stanje", unique = false, nullable = false)
 	private double stanje;
 	
+	@Column(name = "vazeci", unique = false, nullable = false)
+	private boolean vazeci;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "banka")
 	private Set<KursnaLista> kursnaLista = new HashSet<KursnaLista>();
 	
@@ -95,12 +98,46 @@ public class Banka implements Serializable {
 		this.bankaNalogodavac = bankaNalogodavac;
 		this.bankaPoverilac = bankaPoverilac;
 	}
+	
+	
 
 
+
+	public Banka(int id, String sifraBanke, String naziv, String pIB, String adresa, @Email String email, String web,
+			String fax, String telefon, String sWIFT, double stanje, boolean vazeci, Set<KursnaLista> kursnaLista,
+			Set<RacunPravnogLica> racunPravnogLica, Set<Poruka> bankaNalogodavac, Set<Poruka> bankaPoverilac) {
+		super();
+		this.id = id;
+		this.sifraBanke = sifraBanke;
+		this.naziv = naziv;
+		PIB = pIB;
+		this.adresa = adresa;
+		this.email = email;
+		this.web = web;
+		this.fax = fax;
+		this.telefon = telefon;
+		SWIFT = sWIFT;
+		this.stanje = stanje;
+		this.vazeci = vazeci;
+		this.kursnaLista = kursnaLista;
+		this.racunPravnogLica = racunPravnogLica;
+		this.bankaNalogodavac = bankaNalogodavac;
+		this.bankaPoverilac = bankaPoverilac;
+	}
 
 	public Banka(int id, String naziv) {
 		this.id = id;
 		this.naziv = naziv;
+	}
+	
+	
+
+	public boolean isVazeci() {
+		return vazeci;
+	}
+
+	public void setVazeci(boolean vazeci) {
+		this.vazeci = vazeci;
 	}
 
 	public int getId() {

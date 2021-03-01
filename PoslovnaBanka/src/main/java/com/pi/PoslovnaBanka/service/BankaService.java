@@ -21,24 +21,27 @@ public class BankaService implements BankaServiceInterface{
 
 	@Override
 	public List<Banka> findAll() {
-		return bankaRepository.findAll();
+		return bankaRepository.getVazeceBanke();
 	}
 
 	@Override
-	public int save(Banka banka) {
-		return bankaRepository.save(banka).getId();
-	}
-
-	@Override
-	public boolean remove(int id) {
-		bankaRepository.deleteById(id);
-		return true;
+	public void remove(Banka banka) {
+		Banka removedBanka = bankaRepository.findById(banka.getId()).orElse(null);
+		removedBanka.setVazeci(false);
+		bankaRepository.save(removedBanka);
 	}
 
 	@Override
 	public Banka getBankByName(String naziv) {
 		return bankaRepository.getBankByName(naziv);
 	}
+
+	@Override
+	public Banka save(Banka banka) {
+		return bankaRepository.save(banka);
+	}
+
+
 	
 	
 }

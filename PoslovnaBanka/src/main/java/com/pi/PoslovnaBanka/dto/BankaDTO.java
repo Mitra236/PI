@@ -20,6 +20,7 @@ public class BankaDTO implements Serializable {
 	private String telefon;
 	private String SWIFT;
 	private double stanje;
+	private boolean vazeci;
 	private ArrayList<KursnaListaDTO> kursnaLista = new ArrayList<KursnaListaDTO>();
 	private ArrayList<RacunPravnogLicaDTO> racunPravnogLica = new ArrayList<RacunPravnogLicaDTO>();
 	private ArrayList<PorukaDTO> bankaNalogodavac = new ArrayList<PorukaDTO>();
@@ -45,6 +46,33 @@ public class BankaDTO implements Serializable {
 		this.bankaNalogodavac = bankaNalogodavac;
 		this.bankaPoverilac = bankaPoverilac;
 	}
+	
+	
+
+	public BankaDTO(int id, String sifraBanke, String naziv, String pIB, String adresa, String email, String web,
+			String fax, String telefon, String sWIFT, double stanje, boolean vazeci,
+			ArrayList<KursnaListaDTO> kursnaLista, ArrayList<RacunPravnogLicaDTO> racunPravnogLica,
+			ArrayList<PorukaDTO> bankaNalogodavac, ArrayList<PorukaDTO> bankaPoverilac) {
+		super();
+		this.id = id;
+		this.sifraBanke = sifraBanke;
+		this.naziv = naziv;
+		PIB = pIB;
+		this.adresa = adresa;
+		this.email = email;
+		this.web = web;
+		this.fax = fax;
+		this.telefon = telefon;
+		SWIFT = sWIFT;
+		this.stanje = stanje;
+		this.vazeci = vazeci;
+		this.kursnaLista = kursnaLista;
+		this.racunPravnogLica = racunPravnogLica;
+		this.bankaNalogodavac = bankaNalogodavac;
+		this.bankaPoverilac = bankaPoverilac;
+	}
+
+
 
 	public BankaDTO() {
 		super();
@@ -53,9 +81,23 @@ public class BankaDTO implements Serializable {
 	public BankaDTO(Banka banka) {
 		this(banka.getId(), banka.getSifraBanke(), banka.getNaziv(), banka.getPIB(), 
 				banka.getAdresa(), banka.getEmail(), banka.getWeb(), banka.getFax(), banka.getTelefon(),
-				banka.getSWIFT(), banka.getStanje(), new ArrayList<KursnaListaDTO>(), new ArrayList<RacunPravnogLicaDTO>(), 
+				banka.getSWIFT(), banka.getStanje(), banka.isVazeci() ,new ArrayList<KursnaListaDTO>(), new ArrayList<RacunPravnogLicaDTO>(), 
 				new ArrayList<PorukaDTO>(), new ArrayList<PorukaDTO>());
 	}
+	
+	
+
+	public boolean isVazeci() {
+		return vazeci;
+	}
+
+
+
+	public void setVazeci(boolean vazeci) {
+		this.vazeci = vazeci;
+	}
+
+
 
 	public int getId() {
 		return id;
