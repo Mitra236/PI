@@ -97,4 +97,12 @@ public class Poruka implements Serializable {
 	public void setRacunNalogodavca(Banka racunNalogodavca) {
 		this.racunNalogodavca = racunNalogodavca;
 	}
+
+	public Set<PorukeUPaketu> getPorukaPaket() {
+		return porukaPaket;
+	}
+
+	public void setPorukaPaket(Set<PorukeUPaketu> porukaPaket) {
+		this.porukaPaket = porukaPaket;
+	}
 }
