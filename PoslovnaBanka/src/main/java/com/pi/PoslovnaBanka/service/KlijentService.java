@@ -11,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pi.PoslovnaBanka.dto.KlijentDTO;
-import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.entity.Klijent;
+import com.pi.PoslovnaBanka.entity.Uloga;
 import com.pi.PoslovnaBanka.repository.KlijentRepository;
 import com.pi.PoslovnaBanka.repository.RacunPravnogLicaRepository;
 
@@ -62,7 +62,7 @@ public class KlijentService implements KlijentServiceInterface {
 		klijent.setEmail(klijentDTO.getEmail());
 		klijent.setTelefon(klijentDTO.getTelefon());
 		klijent.setAdresa(klijentDTO.getAdresa());
-		klijent.setUloga(klijentDTO.getUloga());
+		klijent.setUloga(Uloga.FizickoLice);
 		klijent.setVazeci(true);
 		return klijentRepo.save(klijent).getId();
 	}

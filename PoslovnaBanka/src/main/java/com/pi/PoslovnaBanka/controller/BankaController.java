@@ -2,7 +2,6 @@ package com.pi.PoslovnaBanka.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,9 +24,7 @@ import com.pi.PoslovnaBanka.dto.KursnaListaDTO;
 import com.pi.PoslovnaBanka.entity.Banka;
 import com.pi.PoslovnaBanka.entity.KursUValuti;
 import com.pi.PoslovnaBanka.entity.KursnaLista;
-import com.pi.PoslovnaBanka.entity.Poruka;
 import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
-import com.pi.PoslovnaBanka.entity.Valuta;
 import com.pi.PoslovnaBanka.service.BankaServiceInterface;
 import com.pi.PoslovnaBanka.service.KursUValutiServiceInterface;
 import com.pi.PoslovnaBanka.service.KursnaListaServiceInterface;

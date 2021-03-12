@@ -1,9 +1,6 @@
 package com.pi.PoslovnaBanka.dto;
 
-import java.util.ArrayList;
-
 import com.pi.PoslovnaBanka.entity.Klijent;
-import com.pi.PoslovnaBanka.entity.RacunPravnogLica;
 import com.pi.PoslovnaBanka.entity.Uloga;
 
 public class RacunPravnogLicaKlijentDTO {

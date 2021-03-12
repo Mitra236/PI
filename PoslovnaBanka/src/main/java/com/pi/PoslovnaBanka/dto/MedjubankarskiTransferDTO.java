@@ -2,8 +2,6 @@ package com.pi.PoslovnaBanka.dto;
 
 import java.io.Serializable;
 
-import com.pi.PoslovnaBanka.entity.Poruka;
-
 
 public class MedjubankarskiTransferDTO implements Serializable {
 

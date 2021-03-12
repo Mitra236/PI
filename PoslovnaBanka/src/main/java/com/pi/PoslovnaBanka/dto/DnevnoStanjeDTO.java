@@ -1,7 +1,6 @@
 package com.pi.PoslovnaBanka.dto;
 
 import java.io.Serializable;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class DnevnoStanjeDTO implements Serializable {
 	public DnevnoStanjeDTO(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
 		this(dnevnoStanjeRacuna.getBrojIzvoda(), dnevnoStanjeRacuna.getDatumPoslednjegPrometa(), dnevnoStanjeRacuna.getPrethodnoStanje(),
 				dnevnoStanjeRacuna.getPrometUKorist(), dnevnoStanjeRacuna.getPrometNaTeret(), dnevnoStanjeRacuna.getTrenutnoStanje(),
-				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), new ArrayList());
+				new RacunPravnogLicaDTO(dnevnoStanjeRacuna.getRacunPravnogLica()), new ArrayList<TransakcijaDTO>());
 	}
 
 	public int getBrojIzvoda() {

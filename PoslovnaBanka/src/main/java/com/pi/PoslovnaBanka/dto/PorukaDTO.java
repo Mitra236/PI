@@ -2,7 +2,6 @@ package com.pi.PoslovnaBanka.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.pi.PoslovnaBanka.entity.Poruka;
 import com.pi.PoslovnaBanka.entity.PorukeUPaketu;
