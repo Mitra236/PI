@@ -70,7 +70,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		Klijent klijent = klijentRepo.findById(racunPravnogLica.getKlijent().getId()).orElse(null);
 		
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
-		Banka banka = bankaRepo.findById(racunPravnogLica.getBanka().getId()).orElse(null);
+		Banka banka = bankaRepo.findById(1).orElse(null);
 				
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
