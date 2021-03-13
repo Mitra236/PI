@@ -75,6 +75,7 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
 		racun.setKlijent(klijent);
+		racun.setVazeci(true);
 		racun.setBrojRacuna(racunPravnogLica.getBrojRacuna());
 		racun.setDatumOtvaranja(java.sql.Date.valueOf(LocalDate.now()));
 		
