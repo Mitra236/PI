@@ -136,6 +136,8 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			transakcija.setValuta(valutaRepo.findById(transakcijaDTO.getValuta().getId()).orElse(null));
 		} else {transakcija.setValuta(racunDuznika.getValuta());}
 		
+		Integer saved = transakcijaRepo.save(transakcija).getBrojStavke();
+		
 		if(racunDuznika.getBanka() != racunPoverioca.getBanka()) {
 			Poruka poruka = new Poruka();
 			poruka.setUkupanIznos(amount);
@@ -167,7 +169,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			bankaRepo.save(bankaPoverilac);		
 		}
 		
-		return transakcijaRepo.save(transakcija).getBrojStavke();
+		return saved;
 	}
 
 	@Override

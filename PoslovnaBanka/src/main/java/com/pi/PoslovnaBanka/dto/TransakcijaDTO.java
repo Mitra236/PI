@@ -34,12 +34,13 @@ public class TransakcijaDTO implements Serializable {
 	private ValutaDTO valuta;
 	private DnevnoStanjeDTO dnevnoStanjeRacuna;
 	private VrstaPlacanjaDTO vrstaPlacanja;
+	private boolean imaPoruke;
 	
 	public TransakcijaDTO(int brojStavke, String duznik, String svrhaPlacanja, String poverilac, Date datumPrijema,
 			Date datumValute, String racunDuznika, int modelZaduzenja, String pozivNaBrojZaduzenja,
 			String racunPoverioca, int modelOdobrenja, String pozivNaBrojOdobrenja, boolean hitno, double iznos,
 			TipGreske tipGreske, Status status, SmerTransakcije smerTransakcije, NaseljenoMestoDTO naseljenoMesto, ValutaDTO valuta,
-			DnevnoStanjeDTO dnevnoStanjeRacuna, VrstaPlacanjaDTO vrstaPlacanja) {
+			DnevnoStanjeDTO dnevnoStanjeRacuna, VrstaPlacanjaDTO vrstaPlacanja, boolean imaPoruke) {
 		super();
 		this.brojStavke = brojStavke;
 		this.duznik = duznik;
@@ -62,6 +63,7 @@ public class TransakcijaDTO implements Serializable {
 		this.valuta = valuta;
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
 		this.vrstaPlacanja = vrstaPlacanja;
+		this.imaPoruke = imaPoruke;
 	}
 
 	public TransakcijaDTO() {
@@ -74,9 +76,25 @@ public class TransakcijaDTO implements Serializable {
 				transakcija.getPozivNaBrojZaduzenja(), transakcija.getRacunPoverioca(), transakcija.getModelOdobrenja(),
 				transakcija.getPozivNaBrojOdobrenja(), transakcija.isHitno(), transakcija.getIznos(), transakcija.getTipGreske(),
 				transakcija.getStatus(), transakcija.getSmer(),
-				new NaseljenoMestoDTO(transakcija.getNaseljenoMesto()), new ValutaDTO(transakcija.getValuta()), 
-				new DnevnoStanjeDTO(transakcija.getDnevnoStanjeRacuna()), new VrstaPlacanjaDTO(transakcija.getVrstaPlacanja()));
+				null, null, 
+				null, null, false);
+		if(transakcija.getNaseljenoMesto() != null) {
+			this.setNaseljenoMesto(new NaseljenoMestoDTO(transakcija.getNaseljenoMesto()));
+		}
+		if(transakcija.getDnevnoStanjeRacuna()!= null) {
+			this.setDnevnoStanjeRacuna(new DnevnoStanjeDTO(transakcija.getDnevnoStanjeRacuna()));
+		}
+		if(transakcija.getValuta() != null) {
+			this.setValuta(new ValutaDTO(transakcija.getValuta()));
+		}
+		if(transakcija.getVrstaPlacanja() != null) {
+			this.setVrstaPlacanja(new VrstaPlacanjaDTO(transakcija.getVrstaPlacanja()));
+		}
+		if(transakcija.getPorukaPaket() != null && !transakcija.getPorukaPaket().isEmpty()) {
+			this.setImaPoruke(true);
+		}
 	}
+	
 	public int getBrojStavke() {
 		return brojStavke;
 	}
@@ -248,4 +266,14 @@ public class TransakcijaDTO implements Serializable {
 	public void setSmerTransakcije(SmerTransakcije smerTransakcije) {
 		this.smerTransakcije = smerTransakcije;
 	}
+
+	public boolean isImaPoruke() {
+		return imaPoruke;
+	}
+
+	public void setImaPoruke(boolean imaPoruke) {
+		this.imaPoruke = imaPoruke;
+	}
+	
+	
 }

@@ -41,7 +41,10 @@ public class RacunPravnogLicaDTO implements Serializable {
 	public RacunPravnogLicaDTO(RacunPravnogLica racunPravnogLica) {
 		this(racunPravnogLica.getId(), racunPravnogLica.getBrojRacuna(), racunPravnogLica.getDatumOtvaranja(), racunPravnogLica.isVazeci(),
 				new ValutaDTO(racunPravnogLica.getValuta()), new BankaDTO(racunPravnogLica.getBanka()),
-				new UkidanjeDTO(racunPravnogLica.getUkidanje()), new RacunPravnogLicaKlijentDTO(racunPravnogLica.getKlijent()), new ArrayList<DnevnoStanjeDTO>());
+				null, new RacunPravnogLicaKlijentDTO(racunPravnogLica.getKlijent()), new ArrayList<DnevnoStanjeDTO>());
+		if(racunPravnogLica.getUkidanje() != null) {
+			this.setUkidanje(new UkidanjeDTO(racunPravnogLica.getUkidanje()));
+		}
 	}
 
 	public int getId() {

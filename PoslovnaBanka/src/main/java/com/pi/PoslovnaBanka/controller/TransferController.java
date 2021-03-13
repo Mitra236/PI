@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -82,9 +83,10 @@ public class TransferController {
 		}
 		return new ResponseEntity<>(transakcija, HttpStatus.OK);
 	}
+	//@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	
 	@GetMapping(value="/by-date")
-	private ResponseEntity<List<TransakcijaDTO>> getTransactionByAccountNumberAndDate(@RequestParam("brojRacuna") String brojRacuna, @RequestParam("od_datuma") Date odDatuma, @RequestParam("do_datuma") Date doDatuma) {
+	private ResponseEntity<List<TransakcijaDTO>> getTransactionByAccountNumberAndDate(@RequestParam("brojRacuna") String brojRacuna, @RequestParam("od_datuma") java.sql.Date odDatuma, @RequestParam("do_datuma") java.sql.Date doDatuma) {
 		List<TransakcijaDTO> transakcijaDTOs = transakcijaServiceInterface.getTransactionByAccountNumberAndTimeRange(brojRacuna, odDatuma, doDatuma);
 		if (transakcijaDTOs == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
