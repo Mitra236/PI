@@ -138,6 +138,7 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 		
 		Integer saved = transakcijaRepo.save(transakcija).getBrojStavke();
 		
+		
 		if(racunDuznika.getBanka() != racunPoverioca.getBanka()) {
 			Poruka poruka = new Poruka();
 			poruka.setUkupanIznos(amount);
@@ -152,6 +153,8 @@ public class TransakcijaService implements TransakcijaServiceInterface {
 			
 			porukaRepo.save(poruka);
 			
+			transakcija.setImaPoruku(true);
+			transakcijaRepo.save(transakcija).getBrojStavke();
 			//poruka u paketu
 			
 			PorukeUPaketu porukeUPaketu = new PorukeUPaketu();

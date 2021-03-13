@@ -76,6 +76,9 @@ public class Transakcija implements Serializable {
 	@Column(name = "smer", unique = false, nullable = true)
 	private SmerTransakcije smer;
 	
+	@Column(name = "ima_poruku", unique = false, nullable = true)
+	private boolean imaPoruku;
+	
 	@ManyToOne
     @JoinColumn(name = "naseljeno_mesto", referencedColumnName = "naseljeno_mesto_id", nullable=true)
 	private NaseljenoMesto naseljenoMesto;
@@ -98,7 +101,7 @@ public class Transakcija implements Serializable {
 	public Transakcija(int brojStavke, String duznik, String svrhaPlacanja, String poverilac, Date datumPrijema,
 			Date datumValute, String racunDuznika, int modelZaduzenja, String pozivNaBrojZaduzenja,
 			String racunPoverioca, int modelOdobrenja, String pozivNaBrojOdobrenja, boolean hitno, double iznos,
-			TipGreske tipGreske, Status status, SmerTransakcije smer, NaseljenoMesto naseljenoMesto, Valuta valuta,
+			TipGreske tipGreske, Status status, SmerTransakcije smer, boolean imaPoruku, NaseljenoMesto naseljenoMesto, Valuta valuta,
 			DnevnoStanjeRacuna dnevnoStanjeRacuna, VrstaPlacanja vrstaPlacanja, Set<PorukeUPaketu> porukaPaket) {
 		super();
 		this.brojStavke = brojStavke;
@@ -116,6 +119,7 @@ public class Transakcija implements Serializable {
 		this.hitno = hitno;
 		this.iznos = iznos;
 		this.tipGreske = tipGreske;
+		this.imaPoruku = imaPoruku;
 		this.status = status;
 		this.smer = smer;
 		this.naseljenoMesto = naseljenoMesto;
@@ -331,5 +335,13 @@ public class Transakcija implements Serializable {
 
 	public void setSmer(SmerTransakcije smer) {
 		this.smer = smer;
+	}
+
+	public boolean isImaPoruku() {
+		return imaPoruku;
+	}
+
+	public void setImaPoruku(boolean imaPoruku) {
+		this.imaPoruku = imaPoruku;
 	}
 }
