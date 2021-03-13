@@ -77,7 +77,7 @@ public class TransakcijaDTO implements Serializable {
 				transakcija.getPozivNaBrojOdobrenja(), transakcija.isHitno(), transakcija.getIznos(), transakcija.getTipGreske(),
 				transakcija.getStatus(), transakcija.getSmer(),
 				null, null, 
-				null, null, false);
+				null, null, transakcija.isImaPoruku());
 		if(transakcija.getNaseljenoMesto() != null) {
 			this.setNaseljenoMesto(new NaseljenoMestoDTO(transakcija.getNaseljenoMesto()));
 		}
@@ -89,9 +89,6 @@ public class TransakcijaDTO implements Serializable {
 		}
 		if(transakcija.getVrstaPlacanja() != null) {
 			this.setVrstaPlacanja(new VrstaPlacanjaDTO(transakcija.getVrstaPlacanja()));
-		}
-		if(transakcija.getPorukaPaket() != null && !transakcija.getPorukaPaket().isEmpty()) {
-			this.setImaPoruke(true);
 		}
 	}
 	
