@@ -2,7 +2,9 @@ package com.pi.PoslovnaBanka.service;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,11 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		
 		Valuta valuta = valutaRepo.findById(racunPravnogLica.getValuta().getId()).orElse(null);
 		Banka banka = bankaRepo.findById(1).orElse(null);
+		
+		DnevnoStanjeRacuna dnevnoStanje = createDailyAccountState();
+		dnevnoStanjeRepo.save(dnevnoStanje);
+		Set<DnevnoStanjeRacuna> dnevnoStanjeSet = new HashSet<DnevnoStanjeRacuna>();
+		dnevnoStanjeSet.add(dnevnoStanje);
 				
 		racun.setBanka(banka);
 		racun.setValuta(valuta);
@@ -78,25 +85,25 @@ public class RacunPravnogLicaService implements RacunPravnogLicaServiceInterface
 		racun.setVazeci(true);
 		racun.setBrojRacuna(racunPravnogLica.getBrojRacuna());
 		racun.setDatumOtvaranja(java.sql.Date.valueOf(LocalDate.now()));
-		
+
+		dnevnoStanjeRepo.save(dnevnoStanje);
 		klijentRepo.save(klijent);
 		racunPravnogLicaRepo.save(racun);
-		
-		for (DnevnoStanjeDTO dnevnoStanjeDTO : racunPravnogLica.getDnevnoStanjeRacuna()) {
-			DnevnoStanjeRacuna newDailyState = createDailyAccountState(dnevnoStanjeDTO);
-			newDailyState.setRacunPravnogLica(racun);
-			dnevnoStanjeRepo.save(newDailyState);
-		}
+
+		dnevnoStanje.setRacunPravnogLica(racun);
+		racun.setDnevnoStanjeRacuna(dnevnoStanjeSet);
+		racunPravnogLicaRepo.save(racun);
+
 
 		return racun.getId();
 	}
 	
-	private static DnevnoStanjeRacuna createDailyAccountState(DnevnoStanjeDTO dnevnoStanje)	{
+	private static DnevnoStanjeRacuna createDailyAccountState()	{
 		DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna();
 		
 		dnevnoStanjeRacuna.setDatumPoslednjegPrometa(java.sql.Date.valueOf(LocalDate.now()));
 		dnevnoStanjeRacuna.setPrethodnoStanje(0);
-		dnevnoStanjeRacuna.setTrenutnoStanje(dnevnoStanje.getTrenutnoStanje());
+		dnevnoStanjeRacuna.setTrenutnoStanje(0);
 		dnevnoStanjeRacuna.setPrometNaTeret(0);
 		dnevnoStanjeRacuna.setPrometUKorist(0);
 		

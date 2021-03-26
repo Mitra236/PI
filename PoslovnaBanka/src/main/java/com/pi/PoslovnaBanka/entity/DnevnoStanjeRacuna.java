@@ -43,7 +43,7 @@ public class DnevnoStanjeRacuna implements Serializable {
 	private double trenutnoStanje;
 	
 	@ManyToOne
-    @JoinColumn(name = "racun_pravnog_lica", referencedColumnName = "racun_pravnog_lica_id", nullable=false)
+    @JoinColumn(name = "racun_pravnog_lica", referencedColumnName = "racun_pravnog_lica_id", nullable=true)
 	private RacunPravnogLica racunPravnogLica;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "dnevnoStanjeRacuna")
